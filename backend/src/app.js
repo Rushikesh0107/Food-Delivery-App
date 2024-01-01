@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import userRouter from "./routes/User.route.js"
 import categoryRouter from "./routes/Category.route.js"
 import adminRouter from "./routes/Admin.route.js"
+import foodRouter from "./routes/Food.route.js"
 
 const app = express();
 
@@ -23,5 +24,7 @@ app.use("/api/v1/", adminRouter)
 app.use("/api/v1/users", userRouter)
 
 app.use("/api/v1/category", categoryRouter)
+
+app.use("/api/v1/food", foodRouter)
 
 export { app };

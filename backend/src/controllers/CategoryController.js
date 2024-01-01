@@ -15,6 +15,14 @@ const createCategory = asyncHandler(async (req, res) => {
 
     //console.log(req);
 
+    const existedCategory = await Category.findOne({
+        $or: [{title}]
+    })
+
+    if(existedCategory){
+        throw new ApiErrors(400, "Category already exists")
+    }
+
     const categoryImageLocalPath = req.file?.path
     //console.log(categoryImageLocalPath);
 

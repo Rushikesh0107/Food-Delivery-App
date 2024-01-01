@@ -12,7 +12,7 @@ const router = Router();
 
 router.route("/create-category").post(verifyJWT, verifyAdmin, upload.single("categoryImage"), createCategory);
 
-router.route('/get-all-categories').get(verifyJWT, verifyAdmin, getAllCategories);
+router.route('/get-all-categories').get(verifyJWT, getAllCategories);
 
 router.route("/delete-category/:_id").delete(verifyJWT,verifyAdmin, deleteCategory);
 
