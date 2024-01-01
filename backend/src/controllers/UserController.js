@@ -4,6 +4,7 @@ import { ApiResponse } from '../utils/ApiResponseHandler.js'
 import { User } from '../models/User.model.js'
 import  { uploadOnCloudinary } from '../utils/cloundinary.js'
 import jwt from 'jsonwebtoken'
+import { v2 as cloudinary } from 'cloudinary'
 
 const generateAccessAndRefreshToken = async (id) => {
     try {
@@ -45,7 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiErrors(400, "Avatar file is required")
     }
 
-    const avatar = await uploadOnCloudinary(avatarLocalPath);
+    const avatar = await uploadOnCloudinary(avatarLocalPath, "profile-photo");
 
     const user = await User.create({
         fullname,
@@ -207,6 +208,7 @@ const changeCurrentPassword = asyncHandler(async(req, res) => {
 
     const user = await User.findById(req.user?._id)
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
+    //console.log(isPasswordCorrect);
 
     if (!isPasswordCorrect) {
         throw new ApiErrors(400, "Invalid old password")
@@ -231,17 +233,17 @@ const getCurrentUser = asyncHandler(async(req, res) => {
 })
 
 const updateAccountDetails = asyncHandler(async(req, res) => {
-    const {fullName, email} = req.body
+    const {fullname, email} = req.body
 
-    if (!fullName || !email) {
-        throw new ApiErrors(400, "All fields are required")
+    if (!(fullname || email)) {
+        throw new ApiErrors(400, "Any one field is required")
     }
 
     const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
             $set: {
-                fullName,
+                fullname,
                 email: email
             }
         },
@@ -258,18 +260,30 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
     const avatarLocalPath = req.file?.path
 
     if (!avatarLocalPath) {
-        throw new ApiError(400, "Avatar file is missing")
+        throw new ApiErrors(400, "Avatar file is missing")
     }
 
     //TODO: delete old image - assignment
 
-    const avatar = await uploadOnCloudinary(avatarLocalPath)
+    const currentAvatar = req.user?.avatar;
 
+    const urlParts = currentAvatar.split("/");
+    const n = urlParts.length;
+    const inp = urlParts[n - 2] + "/" + urlParts[n - 1];
+    const newInp = inp.split(".")
+    console.log(newInp[0]);
+
+    if (currentAvatar) {
+        await cloudinary.api.delete_resources(newInp[0]);
+    }
+    
+    const avatar = await uploadOnCloudinary(avatarLocalPath, "profile-photo")
+    
     if (!avatar.url) {
-        throw new ApiError(400, "Error while uploading on avatar")
+        throw new ApiErrors(400, "Error while uploading on avatar")
         
     }
-
+    
     const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
@@ -278,9 +292,10 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
             }
         },
         {new: true}
-    ).select("-password")
-
-    return res
+        ).select("-password")
+        
+        
+        return res
     .status(200)
     .json(
         new ApiResponse(200, user, "Avatar image updated successfully")
