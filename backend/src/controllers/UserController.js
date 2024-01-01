@@ -95,7 +95,7 @@ const loginUser = asyncHandler (async (req, res) => {
     const isPasswordCorrect = await user.isPasswordCorrect(password);
     //console.log(isPasswordCorrect);
 
-    if(isPasswordCorrect){
+    if(!isPasswordCorrect){
         throw new ApiErrors(400, "Password is not correct")
     }
 
@@ -271,7 +271,7 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
     const n = urlParts.length;
     const inp = urlParts[n - 2] + "/" + urlParts[n - 1];
     const newInp = inp.split(".")
-    console.log(newInp[0]);
+    //console.log(newInp[0]);
 
     if (currentAvatar) {
         await cloudinary.api.delete_resources(newInp[0]);
