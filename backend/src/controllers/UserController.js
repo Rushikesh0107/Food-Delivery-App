@@ -51,7 +51,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         fullname,
         username: username.toLowerCase(),
-        email,
+        email: email.toLowerCase(),
         password,
         avatar: avatar.url,
     })
@@ -244,7 +244,7 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
         {
             $set: {
                 fullname,
-                email: email
+                email: email.toLowerCase()
             }
         },
         {new: true}
