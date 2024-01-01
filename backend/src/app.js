@@ -3,6 +3,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import userRouter from "./routes/User.route.js"
 import categoryRouter from "./routes/Category.route.js"
+import adminRouter from "./routes/Admin.route.js"
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-
+app.use("/api/v1/", adminRouter)
 
 app.use("/api/v1/users", userRouter)
 

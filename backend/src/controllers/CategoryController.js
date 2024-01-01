@@ -3,6 +3,7 @@ import { Category } from "../models/Category.model.js"
 import { ApiErrors } from "../utils/ApiErrors.js"
 import { ApiResponse } from "../utils/ApiResponseHandler.js"
 import { uploadOnCloudinary } from "../utils/cloundinary.js"
+import { v2 as cloudinary } from 'cloudinary'
 
 const createCategory = asyncHandler(async (req, res) => {
 
@@ -60,16 +61,28 @@ const getAllCategories = asyncHandler(async (req, res) => {
 })
 
 const deleteCategory = asyncHandler(async (req, res) => {
-    const { id } = req.params.id
+    const _id  = req.params._id
 
-    if(!id){
+    if(!_id){
         throw new ApiErrors(400, "Category id is required")
     }
 
-    const category = await Category.findByIdAndDelete(id)
+    const category = await Category.findByIdAndDelete(_id)
 
     if(!category){
         throw new ApiErrors(400, "Something went wrong while deleting category")
+    }
+
+    const imageToBeDeleted = category.categoryImage;
+
+    const urlParts = imageToBeDeleted.split("/");
+    const n = urlParts.length;
+    const inp = urlParts[n - 2] + "/" + urlParts[n - 1];
+    const newInp = inp.split(".")
+    //console.log(newInp[0]);
+
+    if (newInp) {
+        await cloudinary.api.delete_resources(newInp[0]);
     }
 
     return res.status(200)

@@ -273,7 +273,7 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
     const newInp = inp.split(".")
     //console.log(newInp[0]);
 
-    if (currentAvatar) {
+    if (newInp) {
         await cloudinary.api.delete_resources(newInp[0]);
     }
     
@@ -311,5 +311,6 @@ export {
     changeCurrentPassword,
     getCurrentUser,
     updateAccountDetails,
-    updateUserAvatar
+    updateUserAvatar,
+    generateAccessAndRefreshToken
 }
