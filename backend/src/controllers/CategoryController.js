@@ -13,10 +13,10 @@ const createCategory = asyncHandler(async (req, res) => {
         throw new ApiErrors(400, "Title is required")
     }
 
-    console.log(req);
+    //console.log(req);
 
     const categoryImageLocalPath = req.file?.path
-    console.log(categoryImageLocalPath);
+    //console.log(categoryImageLocalPath);
 
     if(!categoryImageLocalPath){
         throw new ApiErrors(400, "Category image is required")
