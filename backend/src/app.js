@@ -5,6 +5,8 @@ import userRouter from "./routes/User.route.js"
 import categoryRouter from "./routes/Category.route.js"
 import adminRouter from "./routes/Admin.route.js"
 import foodRouter from "./routes/Food.route.js"
+import cartRouter from "./routes/Cart.route.js"
+import addressRouter from "./routes/Address.route.js"
 
 const app = express();
 
@@ -26,5 +28,9 @@ app.use("/api/v1/users", userRouter)
 app.use("/api/v1/category", categoryRouter)
 
 app.use("/api/v1/food", foodRouter)
+
+app.use("/api/v1/cart", cartRouter)
+
+app.use("/api/v1/address", addressRouter)
 
 export { app };
