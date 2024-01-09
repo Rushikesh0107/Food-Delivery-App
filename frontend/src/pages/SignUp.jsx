@@ -3,18 +3,36 @@ import Input from '../components/Input';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [error, setError] = useState("");
+  const [file, setFile] = useState(null);
+  const navigate = useNavigate();
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setValue("avatar", selectedFile); 
+    // Manually set the value for the file input
+  };
 
   const signup = async (data) => {
     try {
-      const result = await axios.post(`http://localhost:8000/api/v1/users/signup`, data)
+      //console.log(data);
+      const result = await axios.post(`http://localhost:8000/api/v1/users/register`, 
+      data,
+      {
+        headers: {
+        "Content-Type": "multipart/form-data",
+        }
+      },
+      )
 
-      console.log(result);
-      navigate('/');
+      //console.log(result);
+      navigate('/address');
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -33,21 +51,28 @@ const SignUp = () => {
           {error}
         </div>
       )}
-      <form className='flex-col gap-2 flex px-8 pt-6 pb-8 mb-4 w-96'>
-      <div 
-      className='flex flex-col items-center gap-2 justify-center cursor-pointer'>
-        <Avatar 
-          alt="" 
-          src=""
-          sx={{ width: 68, height: 68 }}
+      <form 
+      className='flex-col gap-2 flex px-8 pt-6 pb-8 mb-4 w-96'
+      onSubmit={handleSubmit(signup)}
+      >
+      <label htmlFor="avatar" className='cursor-pointer'>
+            <div className='flex flex-col items-center gap-2 justify-center'>
+              <Avatar
+                src={file ? URL.createObjectURL(file) : ''}
+                alt="Avatar"
+                style={{ width: '100px', height: '100px' }}
+              />
+              <span>Upload Avatar</span>
+            </div>
+          </label>
+          <input
+            type='file'
+            id='avatar'
+            style={{ display: 'none' }}
+            onChange={(e) => handleFileChange(e)}
           />
-          <span>Upload Avatar</span>
-      </div>
-      <Input 
-      type='file'
-      id='avatar'
-      style={{display: 'none'}}
-      />
+
+
       <Input
           placeholder="Full Name"
           type="text"
@@ -60,11 +85,11 @@ const SignUp = () => {
           {...register("email", { required: true })}
           />
 
-        <Input
+        {/* <Input
           placeholder="Phone"
           type="number"
           {...register("email", { required: true })}
-          />
+          /> */}
 
         <Input
           placeholder="Username"
@@ -77,7 +102,6 @@ const SignUp = () => {
           type="password"
           {...register("password", { required: true })}
           />  
-
 
         <input 
           type="submit" 
