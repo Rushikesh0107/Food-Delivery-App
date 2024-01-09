@@ -8,7 +8,7 @@ const NavBar = () => {
   const [menu, setMenu] = React.useState(false)
   return (
     <>
-      <div className='bg-green-700 p-4 text-white font-bold text-xl'>
+      <div className='bg-green-700 p-5 text-white font-bold text-xl'>
         <div className='flex justify-between'>
           <Link to="/">
             <RestaurantMenuIcon />

@@ -89,14 +89,31 @@ const loginUser = asyncHandler (async (req, res) => {
     })
 
     if(!user){
-        throw new ApiErrors(400, "Username or email is not correct")
+        return res
+        .status(400)
+        .json(
+            new ApiResponse(
+                400,
+                {},
+                "User not found"
+            )
+        )
     }
 
     const isPasswordCorrect = await user.isPasswordCorrect(password);
     //console.log(isPasswordCorrect);
 
     if(!isPasswordCorrect){
-        throw new ApiErrors(400, "Password is not correct")
+        //throw new ApiErrors(400, "Password is not correct")
+        return res
+        .status(400)
+        .json(
+            new ApiResponse(
+                400,
+                {},
+                "Password is not correct"
+            )
+        )
     }
 
 
