@@ -3,17 +3,35 @@ import { ApiErrors } from '../utils/ApiErrors.js'
 import  { ApiResponse } from '../utils/ApiResponseHandler.js'
 import { Address } from '../models/Address.model.js'
 
-const createAddress = asyncHandler(async (req, res, next) => {
+const createAddress = asyncHandler(async (req, res) => {
     const {addressLine1, addressLine2, city, state, pincode, deliveryInstruction} = req.body
 
+    console.log(req.body);
+
     if([addressLine1, city, state, pincode].some((field) => field?.trim() === "")){
-        throw new ApiErrors(400, "Please fill all the required fields")
+        return res
+        .status(400)
+        .json(
+            new ApiResponse(
+                400,
+                {},
+                "Please fill all required fields"
+            )
+        )
     }
 
     const existingAddress = await Address.findOne({userId: req.user._id})
 
     if(existingAddress){
-        throw new ApiErrors(400, "Address already exists")
+        return res
+        .status(400)
+        .json(
+            new ApiResponse(
+                400,
+                {},
+                "Address already exists"
+            )
+        )
     }
 
     const address = await Address.create(
@@ -29,7 +47,15 @@ const createAddress = asyncHandler(async (req, res, next) => {
     )
 
     if(!address){
-        return next(new ApiErrors(500, "Address not created"))
+        return res
+        .status(500)
+        .json(
+            new ApiResponse(
+                500,
+                {},
+                "Something went wrong on the server-side"
+            )
+        )
     }
 
     return res

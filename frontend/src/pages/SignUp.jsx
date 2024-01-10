@@ -109,6 +109,11 @@ const SignUp = () => {
           className='px-4 py-2 md:px-6 md:py-2 font-bold text-lg md:text-xl rounded-lg bg-green-700 text-white'
           />
       </form>
+      {error && (
+        <div className="bg-red-500 text-white p-4 rounded-lg">
+          {error}
+        </div>
+      )}
     </div>
     </>
   )
