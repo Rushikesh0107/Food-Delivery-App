@@ -4,10 +4,11 @@ import {
     updateAddress,
 } from "../controllers/AddressController.js";
 import { verifyJWT } from '../middlewares/auth.middleware.js';
+import { upload } from '../middlewares/multer.middleware.js';
 
 const router = Router();
 
-router.route("/add-address").post(verifyJWT, createAddress)
+router.route("/add-address").post(verifyJWT, upload.none(), createAddress)
 
 router.route("/update-address/:_id").patch(verifyJWT, updateAddress)
 
