@@ -10,6 +10,8 @@ const Address = () => {
   const [error, setError] =  useState("")
   const navigate = useNavigate()
 
+  console.log(document.cookie);
+
   const addAddress = async (data) => {
     
     try {
@@ -18,9 +20,9 @@ const Address = () => {
       data,
       {
         headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json; charset=utf-8",
         }
-      },
+      }
       )
 
       navigate("/");

@@ -6,9 +6,11 @@ import Footer from './Footer/Footer.jsx'
 const Layout = () => {
   return (
     <>
+    <div className='overflow-x-hidden'>
     <Header />
     <Outlet />
     <Footer />
+    </div>
     </>
   )
 }

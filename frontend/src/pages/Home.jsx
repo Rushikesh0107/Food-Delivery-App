@@ -1,8 +1,13 @@
 import React from 'react'
+import Logout from './Logout'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div
+    className='w-full min-h-screen flex items-center justify-center flex-col'
+    >
+      <Logout />
+    </div>
   )
 }
 
