@@ -31,6 +31,12 @@ const SignUp = () => {
       },
       )
 
+      const refreshToken = result.data.refreshToken;
+      const accessToken = result.data.accessToken;
+
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("accessToken", accessToken);
+
       //console.log(result);
       navigate('/address');
     } catch (error) {

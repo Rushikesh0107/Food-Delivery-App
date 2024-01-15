@@ -11,13 +11,21 @@ const LoginForm = () => {
   const { register, handleSubmit } = useForm();
 
   const login = async (data) => {
+    console.log(data);
     try {
-      const result = await axios.post(`http://localhost:8000/api/v1/users/login`, data)
+      const result = await axios.post(`http://localhost:8000/api/v1/users/login`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        }
+      }
+      )
 
       console.log(result);
       navigate('/');
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error.message);
     }
   };
 

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes,Route } from 'react-router-dom'
+import { Routes,Route } from 'react-router-dom'
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import Layout from './components/Layout.jsx'
@@ -8,7 +8,6 @@ import Address from './pages/Address.jsx'
 function App() {
 
   return (
-    <Router>
       <Routes>
         <Route path='/' element={<Layout />} >
         <Route path='' element={<Home />} />
@@ -17,7 +16,6 @@ function App() {
         <Route path="/address" element={<Address />}/>
       </Route>
       </Routes>
-    </Router>
   )
 }
 

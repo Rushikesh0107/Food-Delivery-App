@@ -77,6 +77,8 @@ const registerUser = asyncHandler(async (req, res) => {
         new ApiResponse(
             201,
             createdUser,
+            refreshToken,
+            accessToken,
             "User created successfully"
         )
     )
