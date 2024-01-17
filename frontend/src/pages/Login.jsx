@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {toast} from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
+import { setSignupData, setToken } from '../slices/authSlice';
 
 const LoginForm = () => {
 
@@ -14,7 +15,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const login = async (data) => {
-    console.log(data);
+    //console.log(data);
+    const toastId = toast.loading('Logging in...');
     try {
       const result = await axios.post(`http://localhost:8000/api/v1/users/login`,
       data,
@@ -28,9 +30,15 @@ const LoginForm = () => {
       const accessToken = result.data.data.accessToken;
       localStorage.setItem("accessToken", accessToken);
 
-      toast.success('Login successfully');
+      dispatch(setSignupData(result.data.data.user))
+      dispatch(setToken(accessToken));
 
+      
+      toast.dismiss(toastId)
+      
       navigate('/');
+      
+      toast.success('Login successfully');
     } catch (error) {
       setError(error.message);
     }

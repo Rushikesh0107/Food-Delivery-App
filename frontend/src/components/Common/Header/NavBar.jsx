@@ -28,9 +28,6 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-      {menu && (
-        <MenuIcon />
-      )}
     </>
   )
 }

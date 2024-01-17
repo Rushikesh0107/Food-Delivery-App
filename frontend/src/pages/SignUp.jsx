@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { setSignupData } from '../slices/authSlice';
+import { setToken } from '../slices/authSlice';
 
 const SignUp = () => {
 
@@ -26,6 +27,7 @@ const SignUp = () => {
   const signup = async (data) => {
     try {
       //console.log(data);
+      const toastId = toast.loading('Signing up...');
       const result = await axios.post(`http://localhost:8000/api/v1/users/register`, 
       data,
       {
@@ -40,7 +42,7 @@ const SignUp = () => {
         email: result.data.data.createdUser.email,
         username: result.data.data.createdUser.username,
         avatar: result.data.data.createdUser.avatar,
-        id: result.data.data.createdUser._id,
+        userId: result.data.data.createdUser._id,
       }
 
       console.log(responseData);
@@ -49,7 +51,9 @@ const SignUp = () => {
       localStorage.setItem("accessToken", accessToken)
 
       dispatch(setSignupData(responseData))
+      dispatch(setToken(accessToken))
 
+      toast.dismiss(toastId);
       toast.success('Sign up successfully');
 
       //console.log(result);

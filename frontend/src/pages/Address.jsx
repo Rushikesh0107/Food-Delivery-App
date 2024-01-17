@@ -3,28 +3,35 @@ import { useForm } from 'react-hook-form'
 import Input from '../components/Input';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+import { useSelector} from 'react-redux'
 
 const Address = () => {
 
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit, setValue} = useForm();
   const [error, setError] =  useState("")
   const navigate = useNavigate()
-
-  console.log(document.cookie);
+  const {signupData, accessToken} = useSelector(state => state.auth)
 
   const addAddress = async (data) => {
+
+    data.userId = signupData.userId
     
     try {
-      console.log(data);
+      //console.log(data);
+      const toastId = toast.loading('Adding address...');
       const result = await axios.post(`http://localhost:8000/api/v1/address/add-address`, 
       data,
       {
         headers: {
         "Content-Type": "application/json; charset=utf-8",
+        "authorization": `Bearer ${accessToken}`
         }
       }
       )
 
+      toast.dismiss(toastId)
+      toast.success('Address added successfully');
       navigate("/");
     } catch (error) {
       console.log(error);
