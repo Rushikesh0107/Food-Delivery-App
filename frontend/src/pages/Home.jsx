@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '../components/Button.jsx'
 import { useNavigate } from 'react-router-dom'
 import {toast} from 'react-hot-toast'
+import axios from 'axios'
 
 const Home = () => {
 
@@ -9,7 +10,7 @@ const Home = () => {
 
   const handleClick = async () => {
 
-    const result = await fetch('http://localhost:8000/api/v1/users/logout',
+    const result = await axios.get('http://localhost:8000/api/v1/users/logout',
     {
       headers: {
         "authorization": `Bearer ${localStorage.getItem('accessToken')}`
@@ -24,7 +25,6 @@ const Home = () => {
     }
 
     localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
     window.location.reload()
 
     navigate("/login")

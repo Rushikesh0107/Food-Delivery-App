@@ -40,7 +40,10 @@ const LoginForm = () => {
       
       toast.success('Login successfully');
     } catch (error) {
-      setError(error.message);
+      setError(error.response.data.message)
+      toast.dismiss(toastId)
+
+      
     }
   };
 

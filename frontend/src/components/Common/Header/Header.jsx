@@ -10,7 +10,7 @@ const Hearder = () => {
 
   const {signupData} = useSelector(state => state.auth)
   console.log(signupData);
-  //const file = signupData.avatar
+  const file = signupData?.avatar
   return (
     <>
     {
@@ -29,11 +29,11 @@ const Hearder = () => {
                 </Link>
               </li>
               <li className='hover:text-yellow-500'>
-              {/* <Avatar
-                src={file ? URL.createObjectURL(file) : ''}
+              <Avatar
+                src={file ? file : ''}
                 alt="Avatar"
-                style={{ width: '100px', height: '100px' }}
-              /> */}
+                style={{ width: '40px', height: '40px' }}
+              />
               </li>
             </ul>
           </div>

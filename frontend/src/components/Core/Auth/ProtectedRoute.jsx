@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-    const { accessToken } = useSelector(state => state.auth);
+    const accessToken = localStorage.getItem('accessToken');
+    console.log("pro acc",accessToken);
   
     if (accessToken !== null) {
       return children;

@@ -28,9 +28,9 @@ function App() {
         } />
       </Route>
 
-      <Route path='/address' element={
+      <Route path='address' element={
       <ProtectedRoute>
-        <Route path="/address" element={<Address />} />
+        <Address />
       </ProtectedRoute>} />
     </Routes>
   );
