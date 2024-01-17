@@ -76,9 +76,10 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(
         new ApiResponse(
             201,
-            createdUser,
-            refreshToken,
-            accessToken,
+            {
+                createdUser,
+                accessToken
+            },
             "User created successfully"
         )
     )
@@ -145,6 +146,7 @@ const loginUser = asyncHandler (async (req, res) => {
             200,
             {
                 user: logedInUser,
+                accessToken
             },
             "User loged in successfully"
         )

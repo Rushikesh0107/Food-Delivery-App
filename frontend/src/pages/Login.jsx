@@ -3,12 +3,15 @@ import Input from '../components/Input';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const login = async (data) => {
     console.log(data);
@@ -22,7 +25,11 @@ const LoginForm = () => {
       }
       )
 
-      console.log(result);
+      const accessToken = result.data.data.accessToken;
+      localStorage.setItem("accessToken", accessToken);
+
+      toast.success('Login successfully');
+
       navigate('/');
     } catch (error) {
       setError(error.message);

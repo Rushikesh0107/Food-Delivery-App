@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { setSignupData } from '../slices/authSlice';
 
 const SignUp = () => {
 
@@ -11,6 +14,7 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -31,16 +35,33 @@ const SignUp = () => {
       },
       )
 
-      const refreshToken = result.data.refreshToken;
-      const accessToken = result.data.accessToken;
+      const responseData = {
+        fullname: result.data.data.createdUser.fullname,
+        email: result.data.data.createdUser.email,
+        username: result.data.data.createdUser.username,
+        avatar: result.data.data.createdUser.avatar,
+        id: result.data.data.createdUser._id,
+      }
 
-      localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("accessToken", accessToken);
+      console.log(responseData);
+
+      const accessToken = result.data.data.accessToken
+      localStorage.setItem("accessToken", accessToken)
+
+      dispatch(setSignupData(responseData))
+
+      toast.success('Sign up successfully');
 
       //console.log(result);
       navigate('/address');
     } catch (error) {
-      setError(error.response.data.message);
+      console.log(error);
+      if(error.response.status === 500){
+        toast.error("Fill all the fields")
+        setTimeout(() => {
+          toast.error("Upload profile photo");
+        }, 5000);
+      }
     }
   }
 
