@@ -13,6 +13,10 @@ const Address = () => {
   const navigate = useNavigate()
   const {signupData, accessToken} = useSelector(state => state.auth)
 
+  if(!accessToken) {
+    navigate("/login")
+  }
+
   const addAddress = async (data) => {
 
     data.userId = signupData.userId

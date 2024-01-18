@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Input from '../components/Input';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
@@ -23,6 +23,7 @@ const SignUp = () => {
     setValue("avatar", selectedFile); 
     // Manually set the value for the file input
   };
+
 
   const signup = async (data) => {
     try {
@@ -56,8 +57,8 @@ const SignUp = () => {
       toast.dismiss(toastId);
       toast.success('Sign up successfully');
 
-      //console.log(result);
-      navigate('/address');
+      console.log("signup successfull");
+      //navigate('/address');
     } catch (error) {
       console.log(error);
       if(error.response.status === 500){
