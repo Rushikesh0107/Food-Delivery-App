@@ -9,7 +9,7 @@ const createAddress = asyncHandler(async (req, res) => {
     console.log(req.body);
 
     if([addressLine1, city, state, pincode].some((field) => field?.trim() === "")){
-        return res
+    return res
         .status(400)
         .json(
             new ApiResponse(
