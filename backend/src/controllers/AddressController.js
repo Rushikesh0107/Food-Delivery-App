@@ -4,9 +4,9 @@ import  { ApiResponse } from '../utils/ApiResponseHandler.js'
 import { Address } from '../models/Address.model.js'
 
 const createAddress = asyncHandler(async (req, res) => {
-    const {addressLine1, addressLine2, city, state, pincode, deliveryInstruction} = req.body
+    const {addressLine1, addressLine2, city, state, pincode, deliveryInstruction, userId} = req.body
 
-    console.log(req.body);
+    //console.log(req.body);
 
     if([addressLine1, city, state, pincode].some((field) => field?.trim() === "")){
     return res
@@ -20,7 +20,7 @@ const createAddress = asyncHandler(async (req, res) => {
         )
     }
 
-    const existingAddress = await Address.findOne({userId: req.user._id})
+    const existingAddress = await Address.findOne({userId: userId})
 
     if(existingAddress){
         return res
@@ -42,7 +42,7 @@ const createAddress = asyncHandler(async (req, res) => {
             state,
             pincode,
             deliveryInstruction,
-            userId: req.user._id
+            userId
         }
     )
 

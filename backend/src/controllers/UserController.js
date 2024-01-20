@@ -26,9 +26,7 @@ const registerUser = asyncHandler(async (req, res) => {
     
     const {fullname, username, email, password} = req.body;
 
-    if(
-        [fullname, username, email, password].some((field) => field?.trim() === "")
-    ) {
+    if(!(fullname && username && email && password)) {
         throw new ApiErrors(400, "All fields are required")
     }
 
@@ -39,6 +37,8 @@ const registerUser = asyncHandler(async (req, res) => {
     if(existedUser){
         throw new ApiErrors(400, "Username or email already exists")
     }
+
+    //console.log(req);
 
     const avatarLocalPath = req.files?.avatar[0]?.path;
 

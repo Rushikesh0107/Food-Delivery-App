@@ -20,7 +20,7 @@ const LoginForm = () => {
       ...prevData,
       [e.target.name]: e.target.value,
     }))
-    console.log(fromData);
+    //console.log(fromData);
   }
 
   const handleOnSubmit = (e) => {
@@ -29,9 +29,9 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='flex flex-col items-center mx-auto justify-center bg-gray-100 p-4 md:p-8 lg:p-12 h-screen'>
+    <div className='min-h-screen flex items-center justify-center flex-col'>
       <div className='mb-6'>
-        <h1 className='text-3xl font-bold'>
+        <h1 className='md:text-3xl text-2xl font-bold mb-4'>
           Login Form
         </h1>
       </div>
@@ -46,7 +46,7 @@ const LoginForm = () => {
       </div>
 
       <form 
-      className='flex flex-col gap-4 w-full md:w-2/3 lg:w-1/2 '
+      className='px-8 pt-6 pb-8 mb-4 w-96 flex-col flex gap-4'
       onSubmit={handleOnSubmit}
       >
         <div className='flex justify-center'>
@@ -56,7 +56,7 @@ const LoginForm = () => {
             name='username'
             value={username}
             placeholder='Username'
-            className='p-3 border rounded-md focus:outline-none focus:border-blue-500'
+            className='p-3 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full'
             onChange={handleOnChange}
           />
         </div>
@@ -68,7 +68,7 @@ const LoginForm = () => {
             name='password'
             value={password}
             placeholder='Password'
-            className='p-3 border rounded-md focus:outline-none focus:border-blue-500'
+            className='p-3 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full'
             onChange={handleOnChange}
           />
         </div>
