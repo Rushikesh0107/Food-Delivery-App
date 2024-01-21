@@ -103,8 +103,32 @@ const deleteCategory = asyncHandler(async (req, res) => {
     )
 })
 
+const getCategoryByTitle = asyncHandler(async (req, res) => {
+    const title = req.params.title
+
+    if(!title){
+        throw new ApiErrors(400, "Category id is required")
+    }
+
+    const category = await Category.findOne({title: title})
+
+    if(!category){
+        throw new ApiErrors(400, "Something went wrong while getting category")
+    }
+
+    return res.status(200)
+    .json(
+        new ApiResponse(
+            200,
+            category,
+            "Category fetched successfully"
+        )
+    )
+})
+
 export {
     createCategory,
     getAllCategories,
-    deleteCategory
+    deleteCategory,
+    getCategoryByTitle
 }

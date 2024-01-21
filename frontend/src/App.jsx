@@ -9,6 +9,8 @@ import Profile from './components/core/Profile/Profile.jsx'
 import SignUpForm from './components/core/Auth/SignUpForm.jsx'
 import Address from './pages/Address.jsx'
 import Store from "./pages/Store.jsx"
+import About from './pages/About.jsx'
+import Contact from './pages/Contact.jsx'
 
 function App() {
 
@@ -18,27 +20,30 @@ function App() {
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} /> 
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpForm />} />
-      {/* Protected Routes */}
+        {/* Protected Routes */}
 
-      <Route path="/profile" element={
+        <Route path="/profile" element={
+          <ProtectedRoutes>
+            <Profile />
+          </ProtectedRoutes>
+        } />
+
+        <Route path="/address" element={
         <ProtectedRoutes>
-          <Profile />
+          <Address />
         </ProtectedRoutes>
-      } />
+        } />
 
-      <Route path="/address" element={
-      <ProtectedRoutes>
-        <Address />
-      </ProtectedRoutes>
-      } />
-
-      <Route path="/store" element={
-      <ProtectedRoutes>
-        <Store />
-      </ProtectedRoutes>  
-      } />
+        <Route path="/store" element={
+        <ProtectedRoutes>
+          <Store />
+        </ProtectedRoutes>  
+        } />
 
       </Route>
     </Routes>

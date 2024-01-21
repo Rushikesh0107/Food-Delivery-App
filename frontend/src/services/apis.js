@@ -14,4 +14,5 @@ export const addressEndpoints = {
 
 export const categoryEndpoints = {
     GET_CATEGORIES_API: BASE_URL + '/category/get-all-categories',
+    GET_CATEGORIES_BY_TITLE_API: BASE_URL + `/category/get-category-by-title`,
 }

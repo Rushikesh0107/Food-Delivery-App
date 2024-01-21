@@ -111,9 +111,11 @@ const Header = () => {
       </div>
 
       <div>
-        <RestaurantMenuIcon
-          style={{ width: '45px', height: '45px', color: 'white' }}
-        />
+        <Link to={"/"} className="flex items-center">
+            <RestaurantMenuIcon className="text-white" 
+            sx={{width: '2.5rem', height: '2.5rem'}}
+            />
+        </Link>
       </div>
 
       <div>

@@ -4,7 +4,8 @@ import { verifyAdmin } from "../middlewares/verifyAdmin.js";
 import { 
     createCategory, 
     getAllCategories ,
-    deleteCategory
+    deleteCategory,
+    getCategoryByTitle
 } from "../controllers/CategoryController.js";
 import { upload } from "../middlewares/multer.middleware.js";
 
@@ -15,5 +16,7 @@ router.route("/create-category").post(verifyJWT, verifyAdmin, upload.single("cat
 router.route('/get-all-categories').get(verifyJWT, getAllCategories);
 
 router.route("/delete-category/:_id").delete(verifyJWT,verifyAdmin, deleteCategory);
+
+router.route("/get-category-by-id/:title").get(verifyJWT, getCategoryByTitle);
 
 export default router;
