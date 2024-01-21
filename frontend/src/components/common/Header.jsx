@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StyledBadge from '@mui/material/Badge';
+import {useSelector} from 'react-redux';
 
 const settings = ['Profile', 'Address'];
 const pages = ['Home', 'Store', 'About', 'Contact'];
@@ -14,6 +16,7 @@ const Header = () => {
   const [isLoggedin, setIsLoggedin] = useState(true)
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const {user} = useSelector(state => state.profile)
 
   const token = localStorage.getItem('accessToken')
   //console.log(token);
@@ -114,9 +117,13 @@ const Header = () => {
       </div>
 
       <div>
-        <ShoppingCartIcon 
-        sx={{ color: 'white', width: '32px', height: '32px' }}
-        />
+      <IconButton aria-label="cart">
+        <StyledBadge badgeContent={4} color="error">
+          <ShoppingCartIcon 
+          sx={{ color: 'white', width: '32px', height: '32px'  }}
+          />
+        </StyledBadge>
+      </IconButton>
         </div>
 
       <div className="flex items-center space-x-4">
@@ -127,7 +134,7 @@ const Header = () => {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar 
                 alt="Remy Sharp" 
-                src="/static/images/avatar/2.jpg"
+                src={user?.avatar || 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'}
                 sx={{ width: 32, height: 32 }} 
                 />
               </IconButton>

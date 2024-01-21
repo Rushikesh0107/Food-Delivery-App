@@ -11,3 +11,7 @@ export const authEndpoints  = {
 export const addressEndpoints = {
     ADD_ADDRESS_API: BASE_URL + '/address/add-address',
 }
+
+export const categoryEndpoints = {
+    GET_CATEGORIES_API: BASE_URL + '/category/get-all-categories',
+}

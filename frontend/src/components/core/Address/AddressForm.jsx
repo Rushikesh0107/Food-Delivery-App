@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {addAddress} from '../../../services/Operations/addressApi'
+import {addAddress} from '../../../services/Operations/addressAPI'
 import {setAddress} from '../../../Slices/addressSlice'
 
 const AddressForm = () => {

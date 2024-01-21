@@ -8,6 +8,7 @@ import ProtectedRoutes from './components/core/Auth/ProtectedRoutes.jsx'
 import Profile from './components/core/Profile/Profile.jsx'
 import SignUpForm from './components/core/Auth/SignUpForm.jsx'
 import Address from './pages/Address.jsx'
+import Store from "./pages/Store.jsx"
 
 function App() {
 
@@ -31,6 +32,12 @@ function App() {
       <ProtectedRoutes>
         <Address />
       </ProtectedRoutes>
+      } />
+
+      <Route path="/store" element={
+      <ProtectedRoutes>
+        <Store />
+      </ProtectedRoutes>  
       } />
 
       </Route>
