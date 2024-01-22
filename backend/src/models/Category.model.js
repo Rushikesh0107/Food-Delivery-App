@@ -6,12 +6,6 @@ const categorySchema = new Schema({
         required: true,
         trim: true,
     },
-    value:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Food',
-        }
-    ],
     categoryImage: {
         type: String,
         required: true,

@@ -48,23 +48,6 @@ const addFood = asyncHandler(async (req, res) => {
         throw new ApiErrors(500, "Something went wrong while creating food")
     }
 
-    const categoryToPushFoodIn = await Category.findByIdAndUpdate(
-        food.category,
-        {
-            $push: {
-                value: food._id
-            }
-        },
-        {
-            new: true,
-            runValidators: true,
-        }
-    )
-
-    if(!categoryToPushFoodIn){
-        throw new ApiErrors(404, "Category not found")
-    }
-
     return res
     .status(201)
     .json(
@@ -227,11 +210,37 @@ const getAllFoods = asyncHandler(async (req, res) => {
     )
 })
 
+const getFoodsByCategory = asyncHandler(async (req, res) => {
+    const _id = req.params._id
+
+    if(!_id){
+        throw new ApiErrors(400, "CategoryId is not reaching the controller")
+    }
+
+    const foods = await Food.find({category: _id})
+
+    if(!foods){
+        throw new ApiErrors(404, "Foods not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            foods,
+            "Foods found"
+        )
+    )
+
+})
+
 export {
     addFood,
     getFoodById,
     deleteFoodById,
     foodAvailability,
     updateFoodById,
-    getAllFoods
+    getAllFoods,
+    getFoodsByCategory
 }

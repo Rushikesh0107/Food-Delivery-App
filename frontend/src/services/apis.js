@@ -19,5 +19,5 @@ export const categoryEndpoints = {
 
 export const foodEndpoints = {
     GET_ALL_FOODS_API: BASE_URL + '/food/get-all-foods',
-    GET_FOOD_BY_TITLE_API: BASE_URL + `/food/get-food-by-title`,
+    GET_FOOD_BY_CATEGORY_API: BASE_URL + `/food/get-foods-by-category`,
 }

@@ -5,7 +5,8 @@ import {
     foodAvailability,
     getAllFoods,
     getFoodById, 
-    updateFoodById 
+    updateFoodById,
+    getFoodsByCategory
 } from "../controllers/FoodController.js";
 import { verifyAdmin } from "../middlewares/verifyAdmin.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -24,5 +25,7 @@ router.route("/delete-food/:_id").delete(verifyJWT, verifyAdmin, deleteFoodById)
 router.route("/get-all-foods").get(verifyJWT, getAllFoods);
 
 router.route("/food-availability/:_id").patch(verifyJWT, verifyAdmin, foodAvailability);
+
+router.route("/get-foods-by-category/:_id").get(verifyJWT, getFoodsByCategory);
 
 export default router;

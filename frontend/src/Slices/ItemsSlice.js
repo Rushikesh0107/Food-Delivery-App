@@ -14,6 +14,6 @@ const itemSlice = createSlice({
     }
 });
 
-export const {setItems} = itemSlice.actions;
+export const {setItems, setItemForParticularCategory} = itemSlice.actions;
 
 export default itemSlice.reducer;

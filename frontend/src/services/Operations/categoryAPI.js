@@ -35,7 +35,7 @@ export const getCategories = () => {
     }
 }
 
-//====================Get-Category-By-Id====================
+//====================Get-Category-By-Title====================
 
 export const getCategoryByTitle = (title) => {
     return async (dispatch) => {
