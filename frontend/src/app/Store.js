@@ -3,6 +3,7 @@ import authReducer from '../Slices/authSlice.js';
 import profileReducer from '../Slices/profileSlice.js';
 import addressReducer from '../Slices/addressSlice.js';
 import categoryReducer from '../Slices/categorySlice.js';
+import itemsReducer from '../Slices/itemsSlice.js';
 
 export const store = configureStore({
     reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
         profile: profileReducer,
         addresss: addressReducer,
         category: categoryReducer,
+        item: itemsReducer,
     },
 })

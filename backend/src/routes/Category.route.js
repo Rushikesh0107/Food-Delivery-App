@@ -17,6 +17,6 @@ router.route('/get-all-categories').get(verifyJWT, getAllCategories);
 
 router.route("/delete-category/:_id").delete(verifyJWT,verifyAdmin, deleteCategory);
 
-router.route("/get-category-by-id/:title").get(verifyJWT, getCategoryByTitle);
+router.route("/get-category-by-title/:title").get(verifyJWT, getCategoryByTitle);
 
 export default router;

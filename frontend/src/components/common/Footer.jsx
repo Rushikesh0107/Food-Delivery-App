@@ -21,7 +21,7 @@ function Footer() {
                             </div>
                             <div>
                                 <p className="text-sm text-gray-600">
-                                    &copy; Copyright 2023. All Rights Reserved by DevUI.
+                                    &copy; Copyright 2023. All Rights Reserved by NutrifyMeals.
                                 </p>
                             </div>
                         </div>
@@ -140,6 +140,18 @@ function Footer() {
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div className='w-full flex justify-center p-6 md:w-1/2 lg:w-3/12'>
+                        <span className=" font-medium text-gray-900 hover:text-gray-700">
+                            Developed by
+                            <a 
+                            href="https://instagram.com/rushikesh1___" className="text-green-600 hover:text-green-500"
+                            target='_blank' rel='noreferrer'
+                            >
+                                {" "}
+                                Rushikesh Dadas
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
