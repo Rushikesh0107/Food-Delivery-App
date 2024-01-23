@@ -2,12 +2,14 @@ import {toast} from "react-hot-toast"
 
 import { apiConnector } from "../apiConnector"
 import {setItems} from "../../Slices/ItemsSlice"
+import { setLoading } from "../../Slices/ItemsSlice"
 import { foodEndpoints } from "../apis"
 
 
 const {
     GET_ALL_FOODS_API,  
     GET_FOOD_BY_CATEGORY_API,
+    GET_FOOD_BY_ID_API,
 } = foodEndpoints;
 
 //====================Get All Foods====================
@@ -15,6 +17,7 @@ const {
 export const getAllFoods = () => {
     return async (dispatch) => {
         const toastId = toast.loading("Loading Foods...");
+        dispatch(setLoading(true));
         //console.log("all wali req ho rahi hai");
 
         try {
@@ -33,7 +36,9 @@ export const getAllFoods = () => {
         } catch (error) {
             console.log("GET_ALL_FOODS_API ERROR", error);
             toast.dismiss(toastId);
+            dispatch(setLoading(false));
         }
+        dispatch(setLoading(false));
     }
 }
 
@@ -42,12 +47,13 @@ export const getAllFoods = () => {
 export const getFoodByCategory = (id) => {
     return async (dispatch) => {
         const toastId = toast.loading("Loading Foods...");
+        dispatch(setLoading(true));
         //console.log(id);
 
         try {
             const response = await apiConnector(
                 "GET",
-                `${GET_FOOD_BY_CATEGORY_API}/${id}`,
+                `${GET_FOOD_BY_ID_API}/${id}`,
                 null,
                 {
                     authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -60,7 +66,11 @@ export const getFoodByCategory = (id) => {
         } catch (error) {
             console.log("GET_FOOD_BY_CATEGORY_API ERROR", error);
             toast.dismiss(toastId);
+            dispatch(setLoading(false));
         }
+        dispatch(setLoading(false));
     }
 }
+
+
 

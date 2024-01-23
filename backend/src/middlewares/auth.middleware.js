@@ -23,7 +23,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        throw new ApiErrors(400, error.message || "Invalid token")
+        throw new ApiErrors(400, error || "Invalid token")
     }
 })  
 

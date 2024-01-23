@@ -17,6 +17,9 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const {user} = useSelector(state => state.profile)
+  const {numberOfItems} = useSelector(state => state.cart)
+  //console.log(numberOfItems);
+  
 
   const token = localStorage.getItem('accessToken')
   //console.log(token);
@@ -119,13 +122,15 @@ const Header = () => {
       </div>
 
       <div>
-      <IconButton aria-label="cart">
-        <StyledBadge badgeContent={4} color="error">
-          <ShoppingCartIcon 
-          sx={{ color: 'white', width: '32px', height: '32px'  }}
-          />
-        </StyledBadge>
-      </IconButton>
+      <Link to={"/cart"}>
+        <IconButton aria-label="cart">
+          <StyledBadge badgeContent={numberOfItems} color="error">
+            <ShoppingCartIcon 
+            sx={{ color: 'white', width: '32px', height: '32px'  }}
+            />
+          </StyledBadge>
+        </IconButton>
+      </Link>
         </div>
 
       <div className="flex items-center space-x-4">

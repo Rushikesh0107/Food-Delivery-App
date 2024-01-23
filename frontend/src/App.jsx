@@ -11,6 +11,7 @@ import Address from './pages/Address.jsx'
 import Store from "./pages/Store.jsx"
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
+import Cart from './pages/Cart.jsx'
 
 function App() {
 
@@ -43,6 +44,12 @@ function App() {
         <ProtectedRoutes>
           <Store />
         </ProtectedRoutes>  
+        } />
+
+        <Route path='/cart' element={
+          <ProtectedRoutes>
+            <Cart />
+          </ProtectedRoutes>
         } />
 
       </Route>

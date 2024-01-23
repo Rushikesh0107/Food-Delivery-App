@@ -6,7 +6,7 @@ import { Food } from '../models/Food.model.js'
 
 const addProductToCart = asyncHandler(async (req, res) => {
     const userId = req.user._id
-    let { productId, quantity, totalPrice} = req.body
+    let { productId, quantity} = req.body
 
     if(!(userId && productId)){
         throw new ApiErrors(400, 'User and Product Id are required')
@@ -27,12 +27,15 @@ const addProductToCart = asyncHandler(async (req, res) => {
     }
 
     const food =await Food.findById(productId)
+    //console.log(food);
+    //console.log();
 
     if(!food){
         throw new ApiErrors(400, "Product is not available")
     }
 
-    totalPrice = food.price * quantity
+    let totalPrice = food.price * quantity
+    console.log(totalPrice);
 
     const addProduct = await Cart.create(
         {
