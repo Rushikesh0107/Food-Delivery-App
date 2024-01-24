@@ -8,12 +8,12 @@ import { store } from './app/Store.js'
 import {Toaster} from 'react-hot-toast'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <Provider store = {store}>
       <BrowserRouter>
         <App />
         <Toaster />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  //</React.StrictMode>,
 )

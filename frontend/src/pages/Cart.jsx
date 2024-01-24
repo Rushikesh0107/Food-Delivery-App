@@ -1,10 +1,10 @@
 import React from 'react'
-import ListOfItemsInCart from '../components/core/Cart/ListOfItemsInCart'
+import CartComponent from '../components/core/Cart/CartComponent'
 
 const Cart = () => {
   return (
     <div>
-        <ListOfItemsInCart />
+      <CartComponent />
     </div>
   )
 }

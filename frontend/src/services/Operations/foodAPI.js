@@ -53,7 +53,7 @@ export const getFoodByCategory = (id) => {
         try {
             const response = await apiConnector(
                 "GET",
-                `${GET_FOOD_BY_ID_API}/${id}`,
+                `${GET_FOOD_BY_CATEGORY_API}/${id}`,
                 null,
                 {
                     authorization: `Bearer ${localStorage.getItem("accessToken")}`

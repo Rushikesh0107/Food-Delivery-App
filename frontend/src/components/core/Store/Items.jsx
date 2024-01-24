@@ -6,7 +6,7 @@ import { getAllFoods } from '../../../services/Operations/foodAPI'
 import Rating from '@mui/material/Rating';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
-import { addToCartAPI } from '../../../services/Operations/cartAPI'
+import { addToCart } from '../../../Slices/cartSlice'
 
 const Items = () => {
   const {items} = useSelector((state) => state.item)
@@ -28,8 +28,9 @@ const Items = () => {
 
     //console.log(items);
 
-    const handleClick = (productId, quantity) => { 
-      dispatch(addToCartAPI(productId, quantity))
+    const handleClick = (item) => { 
+      dispatch(addToCart(item))
+      //console.log(item);
     }
 
   
@@ -63,7 +64,7 @@ const Items = () => {
                   <span className="font-bold text-xl">$ {item.price}</span>
                   <button 
                   className="px-4 py-2 bg-yellow-500 text-white font-semibold rounded"
-                  onClick={(e) => handleClick(item._id, 1)}
+                  onClick={(e) => handleClick(item)}
                   >
                     Add to Cart
                   </button>

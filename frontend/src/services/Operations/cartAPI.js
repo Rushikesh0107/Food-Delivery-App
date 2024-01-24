@@ -1,10 +1,11 @@
 import {toast } from 'react-hot-toast'
 
 import { apiConnector } from '../apiConnector'
-import { addToCart, setNumberOfItems } from '../../Slices/cartSlice'
+import { addToCart, setNumberOfItems, setProductsInCart } from '../../Slices/cartSlice'
 
 import { cartEndpoints } from '../apis'
 import { setLoading } from '../../Slices/ItemsSlice';
+import { foodEndpoints } from '../apis';
 
 const {
     GET_CART_API,
@@ -12,9 +13,13 @@ const {
     REMOVE_FROM_CART_API,
 } = cartEndpoints;
 
+const {
+    GET_FOOD_BY_ID_API,
+} = foodEndpoints;
+
 //====================Get Cart====================
 
-export const getCart = () => {
+export const getCart = (id) => {
     return async (dispatch) => {
         const toastId = toast.loading("Loading Cart...");
 
@@ -66,5 +71,35 @@ export const addToCartAPI = (productId, quantity) => {
             console.log("ADD_TO_CART_API ERROR", error);
             toast.dismiss(toastId);
         }
+    }
+}
+
+
+//====================Fetch Items For The Cart====================
+
+export const fetctItemsForTheCart = (id) => {
+    return async (dispatch) => {
+        const toastId = toast.loading("Loading Cart...");
+        dispatch(setLoading(true));
+
+        try {
+            const response = await apiConnector(
+                "GET",
+                `${GET_FOOD_BY_ID_API}\\${id}`,
+                null,
+                {
+                    authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                }
+            )
+            const cart = response.data.data;
+            dispatch(setProductsInCart(cart));
+            // console.log(cart);
+            toast.dismiss(toastId);
+        } catch (error) {
+            console.log("GET_CART_API ERROR", error);
+            toast.dismiss(toastId);
+            dispatch(setLoading(false));
+        }
+        dispatch(setLoading(false));
     }
 }

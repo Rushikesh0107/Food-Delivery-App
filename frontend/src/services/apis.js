@@ -25,7 +25,6 @@ export const foodEndpoints = {
 
 export const cartEndpoints = {
     GET_CART_API: BASE_URL + '/cart/fetch-user-cart',
-    GET_FOOD_IN_CART_BY_ID_API: BASE_URL + `/food/get-food-by-id`,
     ADD_TO_CART_API: BASE_URL + '/cart/add-to-cart',
     REMOVE_FROM_CART_API: BASE_URL + '/cart/remove-from-cart',
 }
