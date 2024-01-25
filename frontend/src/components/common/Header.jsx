@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <div 
-    className='w-full bg-gradient-to-r from-green-600 to-green-800 h-16 flex items-center px-6 justify-between'>
+    className={`w-full bg-gradient-to-r from-green-600 to-green-800 h-16 flex items-center px-6 justify-between `}>
 
 
       <div>

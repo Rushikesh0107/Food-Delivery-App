@@ -1,22 +1,19 @@
 import React, { useEffect } from 'react'
 import CartComponent from '../components/core/Cart/CartComponent'
-import {useSelector} from 'react-redux'
+import CheckoutBox from '../components/core/Cart/CheckoutBox'
 
 const Cart = () => {
-  let total = useSelector((state) => state.cart.total)
-
-  useEffect(() => {
-    total = localStorage.getItem('total')
-  }, [total])
-
-
-  // console.log(total);
-
 
   return (
-    <div>
+    <div className='mb-5 h- flex-col flex justify-between'>
+      <div className='bg-red-500 overflow-y-scroll'>
       <CartComponent />
-      {total}
+      </div>
+     
+
+     <div>
+     <CheckoutBox />
+     </div>
     </div>
   )
 }
