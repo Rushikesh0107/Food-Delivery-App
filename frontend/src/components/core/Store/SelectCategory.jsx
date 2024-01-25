@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import { getCategories } from '../../../services/Operations/categoryAPI';
 import { useSelector } from 'react-redux';
 import { setCategoryID } from '../../../Slices/categorySlice';
+import {useNavigate} from 'react-router-dom';
 
 export default function SelectCategory() {
   const [categoryId, setCategoryId] = useState("All Items");
   const dispatch = useDispatch();
+
 
   
     useEffect(() => {

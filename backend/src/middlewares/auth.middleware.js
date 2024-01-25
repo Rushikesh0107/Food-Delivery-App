@@ -23,6 +23,14 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
+        if(error.message === "jwt expired"){
+            return res
+            .status(401)
+            .json({
+                success: false,
+                message: "Access token expired"
+            })
+        }
         throw new ApiErrors(400, error || "Invalid token")
     }
 })  

@@ -26,6 +26,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/store" element={<Store />} />
         {/* Protected Routes */}
 
         <Route path="/profile" element={
@@ -40,12 +41,8 @@ function App() {
         </ProtectedRoutes>
         } />
 
-        <Route path="/store" element={
-        <ProtectedRoutes>
-          <Store />
-        </ProtectedRoutes>  
-        } />
 
+        
         <Route path='/cart' element={
           <ProtectedRoutes>
             <Cart />

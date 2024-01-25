@@ -184,7 +184,21 @@ const logoutUser = asyncHandler(async (req, res) => {
 })
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
+    
+    const incommingUserId = req.body.userId
+
+    if(!incommingUserId){
+        throw new ApiErrors(400, "id is required")
+    }
+
+    const user = await User.findById(incommingUserId)
+
+    if(!user){
+        throw new ApiErrors(404, "User not found")
+    }
+
+    const incomingRefreshToken = user.refreshToken
+
 
     if (!incomingRefreshToken) {
         throw new ApiErrors(401, "unauthorized request")
