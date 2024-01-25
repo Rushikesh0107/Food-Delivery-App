@@ -28,7 +28,9 @@ const Items = () => {
 
     //console.log(items);
 
-    const handleClick = (item) => { 
+    const handleClick = (item) => {
+      item = {...item, quantity: 1}
+      console.log(item);
       dispatch(addToCart(item))
       //console.log(item);
     }
