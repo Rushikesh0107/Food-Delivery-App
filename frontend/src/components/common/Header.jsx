@@ -17,8 +17,9 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const {user} = useSelector(state => state.profile)
-  const {numberOfItems} = useSelector(state => state.cart)
-  //console.log(numberOfItems);
+  const {totalItems} = useSelector(state => state.cart)
+  // console.log(user);
+  // console.log(totalItems);
   
 
   const token = localStorage.getItem('accessToken')
@@ -124,7 +125,7 @@ const Header = () => {
       <div>
       <Link to={"/cart"}>
         <IconButton aria-label="cart">
-          <StyledBadge badgeContent={numberOfItems} color="error">
+          <StyledBadge badgeContent={user ? totalItems : null} color="error">
             <ShoppingCartIcon 
             sx={{ color: 'white', width: '32px', height: '32px'  }}
             />

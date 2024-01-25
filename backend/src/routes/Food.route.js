@@ -22,7 +22,7 @@ router.route("/update-food/:_id").patch(verifyJWT, verifyAdmin, updateFoodById)
 
 router.route("/delete-food/:_id").delete(verifyJWT, verifyAdmin, deleteFoodById);
 
-router.route("/get-all-foods").get(verifyJWT, getAllFoods);
+router.route("/get-all-foods").get( getAllFoods);
 
 router.route("/food-availability/:_id").patch(verifyJWT, verifyAdmin, foodAvailability);
 

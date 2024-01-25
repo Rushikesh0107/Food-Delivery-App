@@ -6,7 +6,7 @@ const Cart = () => {
 
   return (
     <div className='mb-5 h- flex-col flex justify-between'>
-      <div className='bg-red-500 overflow-y-scroll'>
+      <div className='overflow-y-scroll'>
       <CartComponent />
       </div>
      

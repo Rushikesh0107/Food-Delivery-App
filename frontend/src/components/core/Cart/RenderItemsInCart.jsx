@@ -17,7 +17,7 @@ const RenderItemsInCart = () => {
     //console.log(cart[0]);
   return (
     <div>
-    {cart.map((item) => {
+    {cart?.map((item) => {
         return (
             <div 
             key={item._id} 
