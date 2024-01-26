@@ -8,55 +8,59 @@ import { v2 as cloudinary } from 'cloudinary'
 
 const addFood = asyncHandler(async (req, res) => {
 
-    const {title, category, description, price } = req.body
-
-    if([title || category || description || price].some((field) => field?.trim() === "")){
-        throw new ApiErrors(400, "All fields are required")
-    }
-
-    const existedFood = await Food.findOne({
-        $or: [{title}]
-    })
-
-    if(existedFood){
-        throw new ApiErrors(400, "Food already exists")
-    }
-
-    //console.log(req);
-
-    const foodImageLocalPath = req.file?.path
-
-    if(!foodImageLocalPath){
-        throw new ApiErrors(400, "Food image is required")
-    }
-
-    const foodImage = await uploadOnCloudinary(foodImageLocalPath, "Food-Image")
-
-    if(!foodImage){
-        throw new ApiErrors(500, "Something went wrong while uploading food image")
-    }
-
-    const food = await Food.create({
-        title,
-        category,
-        description,
-        price,
-        foodImage: foodImage.url,
-    })
-
-    if(!food){
-        throw new ApiErrors(500, "Something went wrong while creating food")
-    }
-
-    return res
-    .status(201)
-    .json(
-        new ApiResponse(
-            201,
-            food,
-            "Food created successfully"
+    try {
+        const {title, category, description, price } = req.body
+    
+        if([title || category || description || price].some((field) => field?.trim() === "")){
+            throw new ApiErrors(400, "All fields are required")
+        }
+    
+        const existedFood = await Food.findOne({
+            $or: [{title}]
+        })
+    
+        if(existedFood){
+            throw new ApiErrors(400, "Food already exists")
+        }
+    
+        //console.log(req);
+    
+        const foodImageLocalPath = req.file?.path
+    
+        if(!foodImageLocalPath){
+            throw new ApiErrors(400, "Food image is required")
+        }
+    
+        const foodImage = await uploadOnCloudinary(foodImageLocalPath, "Food-Image")
+    
+        if(!foodImage){
+            throw new ApiErrors(500, "Something went wrong while uploading food image")
+        }
+    
+        const food = await Food.create({
+            title,
+            category,
+            description,
+            price,
+            foodImage: foodImage.url,
+        })
+    
+        if(!food){
+            throw new ApiErrors(500, "Something went wrong while creating food")
+        }
+    
+        return res
+        .status(201)
+        .json(
+            new ApiResponse(
+                201,
+                food,
+                "Food created successfully"
+            )
         )
-    )
+    } catch (error) {
+        console.log("ERROR OCCURED AT ADD FOOD API", error);
+    }
 })
 
 const getFoodById = asyncHandler(async (req, res) => {

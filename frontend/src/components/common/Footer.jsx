@@ -73,6 +73,14 @@ function Footer() {
                                 Support
                             </h3>
                             <ul>
+                            <li className="mb-4">
+                                    <Link
+                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
+                                        to="/admin-login"
+                                    >
+                                        Admin Login
+                                    </Link>
+                                </li>
                                 <li className="mb-4">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"

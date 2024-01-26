@@ -1,6 +1,7 @@
-import { useState } from 'react'
 import './App.css'
+
 import {Routes, Route} from 'react-router-dom'
+
 import Layout from './components/common/Layout.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
@@ -12,8 +13,16 @@ import Store from "./pages/Store.jsx"
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import Cart from './pages/Cart.jsx'
+import AdminLogin from './pages/AdminLogin.jsx'
+import PageNotFound from './pages/PageNotFound.jsx'
+import AdminDashboard from './pages/AdminDashboard.jsx'
+
+import {useSelector} from 'react-redux' 
 
 function App() {
+
+  const {user} = useSelector(state => state.profile)
+  //console.log(user);
 
   return (
    <>
@@ -27,6 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/store" element={<Store />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
         {/* Protected Routes */}
 
         <Route path="/profile" element={
@@ -43,13 +53,26 @@ function App() {
 
 
         
-        <Route path='/cart' element={
+       {(user?.role === "user") && <Route path='/cart' element={
           <ProtectedRoutes>
             <Cart />
           </ProtectedRoutes>
-        } />
+        } />}
+
+
+
+        {/* Page Not Found (404 Page ) */}
+        <Route path="*" element={<PageNotFound />} />
+
 
       </Route>
+        
+      <Route path='/admin-dashboard' element={
+          <ProtectedRoutes>
+          <AdminDashboard />
+        </ProtectedRoutes>
+      } />
+
     </Routes>
    </>
   )

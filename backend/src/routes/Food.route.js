@@ -26,6 +26,6 @@ router.route("/get-all-foods").get( getAllFoods);
 
 router.route("/food-availability/:_id").patch(verifyJWT, verifyAdmin, foodAvailability);
 
-router.route("/get-foods-by-category/:_id").get(verifyJWT, getFoodsByCategory);
+router.route("/get-foods-by-category/:_id").get(getFoodsByCategory);
 
 export default router;

@@ -6,15 +6,16 @@ import { generateAccessAndRefreshToken } from "../controllers/UserController.js"
 
 const adminLogin = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
+    //console.log(req.body);
 
     if (!username || !password) {
         throw new ApiErrors(400, "Username and password are required");
     }
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username: username });
 
     if (!user) {
-        throw new ApiErrors(400, "User not found");
+        throw new ApiErrors(404, "User not found");
     }
 
     if (password !== user.password) {
@@ -47,6 +48,7 @@ const adminLogin = asyncHandler(async (req, res) => {
                 200,
                 {
                     user: logedInUser,
+                    accessToken,
                 },
                 "User loged in successfully"
             )

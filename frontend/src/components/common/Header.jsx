@@ -48,7 +48,7 @@ const Header = () => {
 
   return (
     <div 
-    className={`w-full bg-gradient-to-r from-green-600 to-green-800 h-16 flex items-center px-6 justify-between `}>
+    className={`w-full bg-gradient-to-r from-green-600 to-green-800 h-16 flex items-center px-6 justify-between`}>
 
 
       <div>
@@ -125,7 +125,7 @@ const Header = () => {
       <div>
       <Link to={"/cart"}>
         <IconButton aria-label="cart">
-          <StyledBadge badgeContent={user ? totalItems : null} color="error">
+          <StyledBadge badgeContent={user?.role === "user" ? totalItems : null} color="error">
             <ShoppingCartIcon 
             sx={{ color: 'white', width: '32px', height: '32px'  }}
             />
