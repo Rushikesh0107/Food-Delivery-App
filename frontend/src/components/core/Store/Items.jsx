@@ -15,7 +15,7 @@ const Items = () => {
   const dispatch = useDispatch()
   const {isLoading} = useSelector((state) => state.item)
 
-   const itemsPerPage = 8; // Change this value to set the number of items per page
+   const itemsPerPage = 10; // Change this value to set the number of items per page
   const [currentPage, setCurrentPage] = useState(1);
 
   //console.log(items);
@@ -70,7 +70,7 @@ const Items = () => {
     </>
     ) : (
       <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {currentItems.map((item) => (
               <div key={item._id} className="p-4 border border-gray-300 rounded-lg max-w-xs justify-self-center">
                 {/* Your item content */}
@@ -82,14 +82,15 @@ const Items = () => {
                   <p className="text-green-500 font-bold text-base ">$ {item.price}</p>
                 </div>
                 <button
-                className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full flex justify-center'
-                onClick={() => handleClick(item)}
+                  className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full flex justify-center'
+                  onClick={() => handleClick(item)}
                 >
                   Add to Cart
                 </button>
               </div>
             ))}
           </div>
+
 
 
           {/* Pagination */}

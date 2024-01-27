@@ -35,7 +35,7 @@ export default function SelectCategory() {
     //console.log(newCategory);
 
   return (
-    <div className="w-full flex justify-center py-5">
+    <div className="w-full flex justify-center py-5 ">
         <select 
         className="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 md:w-60" 
         onChange={handleOnChange}

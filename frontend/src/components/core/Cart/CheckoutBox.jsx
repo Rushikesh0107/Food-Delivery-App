@@ -1,14 +1,20 @@
 import React, {useEffect} from 'react'
 import {useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 const CheckoutBox = () => {
 
-
     let total = useSelector((state) => state.cart.total)
+    const navigate = useNavigate() 
 
     useEffect(() => {
         total = localStorage.getItem('total')
     }, [total])
+
+    const handleCheckout = () => {
+        //console.log('checkout');
+        navigate("/checkout")
+    }
     
     return (
         <div 
@@ -24,7 +30,7 @@ const CheckoutBox = () => {
                     </div>
                     <button
                     className='bg-green-500 text-white px-2 py-1 rounded-lg w-full'
-                    onClick={() => {}}
+                    onClick={handleCheckout}
                     >
                         Checkout
                     </button>

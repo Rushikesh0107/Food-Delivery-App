@@ -6,7 +6,11 @@ const Store = () => {
   return (
     <div>
         <SelectCategory />
+        <div
+        className='flex flex-wrap justify-center flex-col px-4 w-full'
+        >
         <Items />
+        </div>
     </div>
   )
 }

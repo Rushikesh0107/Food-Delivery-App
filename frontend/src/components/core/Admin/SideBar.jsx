@@ -18,7 +18,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import CategoryIcon from '@mui/icons-material/Category';
-import { isMobile } from '../../../Helper/isMobile';
 
 import AddFood from './AddFood';
 import AddCategory from './AddCategory';
