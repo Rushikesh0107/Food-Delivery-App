@@ -59,6 +59,7 @@ export const addFood = (title, description, price, category, foodImage ) => {
         } catch(error){
             console.log("ERROR OCCURED AT ADD FOOD API", error);
             toast.dismiss(toastId);
+            toast.error(error.response.data.data)
         }
     }
 }

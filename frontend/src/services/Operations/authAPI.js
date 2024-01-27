@@ -141,7 +141,7 @@ export const register = (username, password, email, fullname, avatar, navigate) 
             navigate("/address")
             window.location.reload();
         } catch (error){
-            toast.error(error.response?.data?.message)
+            toast.error(error.response?.data?.data)
             console.log("REGISTER_API ERROR", error);
         }
         toast.dismiss(toastId);

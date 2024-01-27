@@ -5,6 +5,7 @@ import { User } from '../models/User.model.js'
 import  { uploadOnCloudinary } from '../utils/cloundinary.js'
 import jwt from 'jsonwebtoken'
 import { v2 as cloudinary } from 'cloudinary'
+import fs from 'fs'
 
 const generateAccessAndRefreshToken = async (id) => {
     try {
@@ -24,65 +25,79 @@ const generateAccessAndRefreshToken = async (id) => {
 
 const registerUser = asyncHandler(async (req, res) => {
     
-    const {fullname, username, email, password} = req.body;
-
-    if(!(fullname && username && email && password)) {
-        throw new ApiErrors(400, "All fields are required")
-    }
-
-    const existedUser = await User.findOne({
-        $or: [{username}, {email}]
-    })
-
-    if(existedUser){
-        throw new ApiErrors(400, "Username or email already exists")
-    }
-
-    //console.log(req);
-
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-
-    if(!avatarLocalPath){
-        throw new ApiErrors(400, "Avatar file is required")
-    }
-
-    const avatar = await uploadOnCloudinary(avatarLocalPath, "profile-photo");
-
-    const user = await User.create({
-        fullname,
-        username: username.toLowerCase(),
-        email: email.toLowerCase(),
-        password,
-        avatar: avatar.url,
-    })
-
-    const createdUser = await User.findById(user._id).select("-password -refreshToken");
-
-    if(!createdUser){
-        throw new ApiErrors(400, "Something went wrong while creating user");
-    }
-
-    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id)
-
-    const option = {
-        httpOnly: true,
-        secure: true
-    }
-
-    return res
-    .status(201)
-    .cookie("refreshToken", refreshToken, option)
-    .cookie("accessToken", accessToken, option)
-    .json(
-        new ApiResponse(
-            201,
-            {
-                createdUser,
-                accessToken
-            },
-            "User created successfully"
+    try {
+        const {fullname, username, email, password} = req.body;
+    
+        if(!(fullname && username && email && password)) {
+            throw new ApiErrors(400, "All fields are required")
+        }
+    
+        const existedUser = await User.findOne({
+            $or: [{username}, {email}]
+        })
+    
+        if(existedUser){
+            throw new ApiErrors(400, "Username or email already exists")
+        }
+    
+        //console.log(req);
+    
+        const avatarLocalPath = req.files?.avatar[0]?.path;
+    
+        if(!avatarLocalPath){
+            throw new ApiErrors(400, "Avatar file is required")
+        }
+    
+        const avatar = await uploadOnCloudinary(avatarLocalPath, "profile-photo");
+    
+        const user = await User.create({
+            fullname,
+            username: username.toLowerCase(),
+            email: email.toLowerCase(),
+            password,
+            avatar: avatar.url,
+        })
+    
+        const createdUser = await User.findById(user._id).select("-password -refreshToken");
+    
+        if(!createdUser){
+            throw new ApiErrors(400, "Something went wrong while creating user");
+        }
+    
+        const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id)
+    
+        const option = {
+            httpOnly: true,
+            secure: true
+        }
+    
+        return res
+        .status(201)
+        .cookie("refreshToken", refreshToken, option)
+        .cookie("accessToken", accessToken, option)
+        .json(
+            new ApiResponse(
+                201,
+                {
+                    createdUser,
+                    accessToken
+                },
+                "User created successfully"
+            )
         )
-    )
+    } catch (error) {
+        console.log("ERROR OCCURED AT REGISTER USER API", error);
+        fs.unlinkSync(`${req.files?.avatar[0]?.path}`)
+        return res
+        .status(error.statusCode)
+        .json(
+            new ApiResponse(
+                error.statusCode,
+                error.message,
+                "Something went wrong while creating user"
+            )
+        )
+    }
 })
 
 const loginUser = asyncHandler (async (req, res) => {

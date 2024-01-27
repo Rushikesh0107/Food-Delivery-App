@@ -15,7 +15,7 @@ const AddFood = () => {
     const dispatch = useDispatch()
 
     const {title, description, price} = formData
-    const [categoryId, setcategoryId] = useState("")
+    const [categoryId, setcategoryId] = useState(null)
     const [file, setFile] = useState(null); 
     //console.log(categoryId);
 

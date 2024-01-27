@@ -5,6 +5,7 @@ import { uploadOnCloudinary } from "../utils/cloundinary.js";
 import { Food } from "../models/Food.model.js";
 import { Category } from "../models/Category.model.js";
 import { v2 as cloudinary } from 'cloudinary'
+import fs from 'fs'
 
 const addFood = asyncHandler(async (req, res) => {
 
@@ -23,9 +24,9 @@ const addFood = asyncHandler(async (req, res) => {
             throw new ApiErrors(400, "Food already exists")
         }
     
-        //console.log(req);
+        //console.log(req.file);
     
-        const foodImageLocalPath = req.file?.path
+        const foodImageLocalPath = req.files?.foodImage[0]?.path;
     
         if(!foodImageLocalPath){
             throw new ApiErrors(400, "Food image is required")
@@ -60,6 +61,16 @@ const addFood = asyncHandler(async (req, res) => {
         )
     } catch (error) {
         console.log("ERROR OCCURED AT ADD FOOD API", error);
+        fs.unlinkSync(`${req.files?.foodImage[0]?.path}`)
+        return res
+        .status(error.statusCode)
+        .json(
+            new ApiResponse(
+                error.statusCode,
+                error.message,
+                "Something went wrong while creating food"
+            )
+        )
     }
 })
 

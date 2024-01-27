@@ -14,7 +14,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const router = Router();
 
-router.route("/add-food").post(verifyJWT, verifyAdmin, upload.single("foodImage"), addFood);
+router.route("/add-food").post(verifyJWT, verifyAdmin, upload.fields([{name:"foodImage", maxCount: 1}]), addFood);
 
 router.route("/get-food-by-id/:_id").get(verifyJWT, getFoodById)
 
