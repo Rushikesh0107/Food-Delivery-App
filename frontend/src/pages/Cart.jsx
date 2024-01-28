@@ -5,16 +5,19 @@ import CheckoutBox from '../components/core/Cart/CheckoutBox'
 const Cart = () => {
 
   return (
-    <div className='mb-5 h- flex-col flex justify-between'>
+    <div className='pb-5 flex-col flex justify-between bg-gradient-to-r from-gray-100 to-green-900'
+    >
       <div 
       className='overflow-y-scroll'
-      style={{height: 'calc(100vh - 64px - 160px)'}}
+      style={{height: 'calc(100vh - 64px - 145px)'}}
       >
       <CartComponent />
       </div>
      
 
-     <div>
+     <div
+     className='pb-5'
+     >
      <CheckoutBox />
      </div>
     </div>

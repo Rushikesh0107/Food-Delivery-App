@@ -57,6 +57,8 @@ const Home = () => {
           initial={{ y: 300, opacity: 0 }} // Initial position outside the viewport on the right
           animate={{ y: 0, opacity: 1, }}
           transition={{ duration: 1, delay: 0.2 }}
+          drag
+          dragConstraints={{ left: -100, right:100, top: -50, bottom: 150 }}
           className='w-full md:h-full md:w-2/3 items-center flex'
         >
           <Hero />
