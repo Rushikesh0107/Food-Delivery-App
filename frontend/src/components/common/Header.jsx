@@ -19,7 +19,7 @@ const Header = () => {
   const {user} = useSelector(state => state.profile)
   const {totalItems} = useSelector(state => state.cart)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  // console.log(user);
+  //console.log(user.avatar);
   // console.log(totalItems);
 
 
@@ -27,6 +27,7 @@ const Header = () => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
+
 
     // Add event listener for window resize
     window.addEventListener('resize', handleResize);
@@ -172,7 +173,9 @@ const Header = () => {
         </Link>
           </div>
 
-        <div className="flex items-center space-x-4">
+          {/* LOGIN/AVATR */}
+
+        <div className="">
           {isLoggedin ? (
           <>
           <Box sx={{ flexGrow: 0 }}>
@@ -181,7 +184,7 @@ const Header = () => {
                   <Avatar 
                   alt="Remy Sharp" 
                   src={user?.avatar || 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'}
-                  sx={{ width: 32, height: 32 }} 
+                  sx={{ width: 40, height: 40 }} 
                   />
                 </IconButton>
               </Tooltip>
@@ -206,7 +209,8 @@ const Header = () => {
                   onClick={handleCloseUserMenu}>
                     <Typography 
                     textAlign="center">
-                      <Link to={`/${setting.toLowerCase()}`}>    {setting}
+                      <Link to={`/${setting.toLowerCase()}`}> 
+                        {setting}
                       </Link>
                       </Typography>
                   </MenuItem>

@@ -37,3 +37,7 @@ export const adminEndpoints = {
     ADD_FOOD_API: BASE_URL + '/food/add-food',
 }
 
+export const userEndpoints = {
+    UPDATE_USER_AVATAR_API: BASE_URL + '/users/update-avatar',
+}
+

@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <>  
     <div
-    className='bg-gradient-to-r from-gray-100 md:flex-row to-green-900 '
+    className='bg-gradient-to-r overflow-x-hidden from-gray-100 md:flex-row to-green-900 '
     >
       <div 
       className='flex bg-gradient-to-r from-gray-100 md:flex-row to-green-900 flex-col items-center w-full '
@@ -54,10 +54,10 @@ const Home = () => {
         {/* HERO */}
 
         <motion.div
-          initial={{ x: 400, opacity: 0 }} // Initial position outside the viewport on the right
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1.2 }}
-          className='w-full sm:w-1/2 h-60 md:h-full md:w-2/3 justify-center items-center flex'
+          initial={{ y: 300, opacity: 0 }} // Initial position outside the viewport on the right
+          animate={{ y: 0, opacity: 1, }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className='w-full md:h-full md:w-2/3 items-center flex'
         >
           <Hero />
         </motion.div>

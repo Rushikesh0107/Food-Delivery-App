@@ -4,7 +4,9 @@ import Items from '../components/core/Store/Items'
 
 const Store = () => {
   return (
-    <div>
+    <div
+    className=''
+    >
         <SelectCategory />
         <div
         className='flex flex-wrap justify-center flex-col px-4 w-full'

@@ -98,7 +98,7 @@ const NavBar = () => {
                         <Avatar 
                         alt="Remy Sharp" 
                         src={user?.avatar || 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'}
-                        sx={{ width: 45, height: 45 }} 
+                        sx={{ width: 47, height: 47 }} 
                         />
                     </IconButton>
                     </Tooltip>

@@ -4,13 +4,13 @@ import {motion} from 'framer-motion'
 const Hero = () => {
   return (
     <motion.div
-    className='w-full '
+    className='w-full'
     >
         <motion.img 
         src="https://res.cloudinary.com/ddara3sez/image/upload/v1706347958/epsqxc75egpme6brxjpq.webp" 
         alt="" 
         className=' mx-auto'
-        style={{width: '90%', height: '80%'}}
+        style={{width: '100%', height: '100%'}}
         whileHover={{ rotate: 20, scale: 1.1 }}
         />
     </motion.div>

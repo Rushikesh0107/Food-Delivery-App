@@ -18,6 +18,7 @@ import Cart from './pages/Cart.jsx'
 import AdminLogin from './pages/AdminLogin.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
+import ProfileEdit from './pages/ProfileEdit.jsx'
 
 import {useSelector} from 'react-redux' 
 import Checkout from './pages/Checkout.jsx'
@@ -78,6 +79,12 @@ function App() {
         <Route path='/checkout' element={
           <ProtectedRoutes>
             <Checkout />
+          </ProtectedRoutes>
+        }/>
+
+        <Route path='/profile/edit' element={
+          <ProtectedRoutes>
+            <ProfileEdit />
           </ProtectedRoutes>
         }/>
 

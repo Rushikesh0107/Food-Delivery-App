@@ -41,7 +41,10 @@ export const addAddress = (addressLine1, addressLine2, city, state, pincode, del
                 throw new Error(response.data.message);
             }
 
-            dispatch(setAddress(response.data.data.address));
+            //console.log(response.data.data);
+
+            dispatch(setAddress(response.data.data));
+            localStorage.setItem("address", JSON.stringify(response.data.data));
             toast.dismiss(toastId);
             toast.success("Address added successfully");
             navigate("/");

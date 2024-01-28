@@ -26,9 +26,9 @@ const generateAccessAndRefreshToken = async (id) => {
 const registerUser = asyncHandler(async (req, res) => {
     
     try {
-        const {fullname, username, email, password} = req.body;
+        const {fullname, username, email, password, phone} = req.body;
     
-        if(!(fullname && username && email && password)) {
+        if(!(fullname && username && email && password && phone)) {
             throw new ApiErrors(400, "All fields are required")
         }
     
@@ -54,6 +54,7 @@ const registerUser = asyncHandler(async (req, res) => {
             fullname,
             username: username.toLowerCase(),
             email: email.toLowerCase(),
+            phone,
             password,
             avatar: avatar.url,
         })
@@ -314,7 +315,7 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
 });
 
 const updateUserAvatar = asyncHandler(async(req, res) => {
-    const avatarLocalPath = req.file?.path
+    const avatarLocalPath = req.files?.avatar[0]?.path;
 
     if (!avatarLocalPath) {
         throw new ApiErrors(400, "Avatar file is missing")

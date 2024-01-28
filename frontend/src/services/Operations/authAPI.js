@@ -94,7 +94,7 @@ export const logout = (token, navigate) => {
 
 //====================Register====================
 
-export const register = (username, password, email, fullname, avatar, navigate) => {
+export const register = (username, password, email, fullname, phone, avatar, navigate) => {
     return async (dispatch) => {
 
         const toastId = toast.loading('Registering...');
@@ -110,6 +110,7 @@ export const register = (username, password, email, fullname, avatar, navigate) 
                     fullname,
                     username,
                     email,
+                    phone,
                     password,
                     avatar,
                 },

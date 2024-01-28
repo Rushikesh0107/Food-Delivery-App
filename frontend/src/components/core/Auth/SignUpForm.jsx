@@ -69,16 +69,16 @@ const SignUpForm = () => {
             onSubmit={handleOnSubmit}
             >
                 <div>
-                <label htmlFor="avatar" className='cursor-pointer'>
-            <div className='flex flex-col items-center gap-2 justify-center'>
-              <Avatar
-                src={file ? URL.createObjectURL(file) : ''}
-                alt="Avatar"
-                style={{ width: '100px', height: '100px' }}
-              />
-              <span>Upload Avatar</span>
-            </div>
-          </label>
+              <label htmlFor="avatar" className='cursor-pointer'>
+                <div className='flex flex-col items-center gap-2 justify-center'>
+                  <Avatar
+                    src={file ? URL.createObjectURL(file) : ''}
+                    alt="Avatar"
+                    style={{ width: '100px', height: '100px' }}
+                  />
+                  <span>Upload Avatar</span>
+                </div>
+              </label>
           <input
             type='file'
             id='avatar'
