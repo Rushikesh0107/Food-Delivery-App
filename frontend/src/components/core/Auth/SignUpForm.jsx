@@ -39,6 +39,7 @@ const SignUpForm = () => {
       const handleOnSubmit =(e) => {
         e.preventDefault();
 
+        //console.log(file);
         const avatarData = {
             name: file ? file.name : '',
             size: file ? file.size : 0,
@@ -46,9 +47,7 @@ const SignUpForm = () => {
 
         const { fullname, email, phone, username, password } = formData;
 
-        dispatch(register(username, password, email, fullname, file, navigate));
-
-        
+        dispatch(register(username, password, email, fullname, phone, file, navigate));
 
         dispatch(setsignupData({ fullname, email, phone, username, password, avatarData}));
         //console.log(formData);
@@ -102,7 +101,7 @@ const SignUpForm = () => {
                 />
 
                 <input 
-                type="text" 
+                type="email" 
                 name='email'
                 required
                 value={email}
@@ -131,7 +130,7 @@ const SignUpForm = () => {
                 placeholder='Username'
                 />
                 <input 
-                type="text" 
+                type="password" 
                 required
                 name='password'
                 value={password}

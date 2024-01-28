@@ -8,7 +8,7 @@ import StyledBadge from '@mui/material/Badge';
 import {useSelector} from 'react-redux';
 import NavBar from './NavBar';
 
-const settings = ['Profile', 'Address'];
+const settings = ['Profile', 'Logout'];
 const pages = ['Home', 'Store', 'About', 'Contact'];
 
 const Header = () => {

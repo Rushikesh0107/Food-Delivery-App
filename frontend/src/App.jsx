@@ -19,6 +19,7 @@ import AdminLogin from './pages/AdminLogin.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import ProfileEdit from './pages/ProfileEdit.jsx'
+import Logout from './pages/Logout.jsx'
 
 import {useSelector} from 'react-redux' 
 import Checkout from './pages/Checkout.jsx'
@@ -85,6 +86,12 @@ function App() {
         <Route path='/profile/edit' element={
           <ProtectedRoutes>
             <ProfileEdit />
+          </ProtectedRoutes>
+        }/>
+
+        <Route path='/logout' element={
+          <ProtectedRoutes>
+            <Logout />
           </ProtectedRoutes>
         }/>
 

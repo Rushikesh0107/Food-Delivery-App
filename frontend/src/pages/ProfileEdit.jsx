@@ -1,6 +1,7 @@
 import React from 'react'
 import ChangeProfilePhoto from '../components/core/Profile/ChangeProfilePhoto'
-import UserInfoFormEdit from '../components/core/Profile/EditProfile'
+import EditAddress from '../components/core/Profile/EditAddress'
+import EditProfile from '../components/core/Profile/EditProfile'
 
 const ProfileEdit = () => {
   return (
@@ -9,9 +10,18 @@ const ProfileEdit = () => {
     >
         <ChangeProfilePhoto />
 
-        <div>
-            <UserInfoFormEdit />
+        <div
+        className=''
+        >
+            <div>
+            <EditProfile />
+            </div>
+
+            <div>
+                <EditAddress />
+            </div>
         </div>
+
     </div>
   )
 }

@@ -39,5 +39,7 @@ export const adminEndpoints = {
 
 export const userEndpoints = {
     UPDATE_USER_AVATAR_API: BASE_URL + '/users/update-avatar',
+    UPDATE_USER_INFO_API: BASE_URL + '/users/update-details',
+    UPDATE_USER_ADDRESS_API: BASE_URL + '/address/update-address',
 }
 

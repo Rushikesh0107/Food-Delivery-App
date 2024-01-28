@@ -100,7 +100,6 @@ export const register = (username, password, email, fullname, phone, avatar, nav
         const toastId = toast.loading('Registering...');
         dispatch(setLoading(true));
 
-        //console.log(avatar);
 
         try{
             const response = await apiConnector(
@@ -142,7 +141,7 @@ export const register = (username, password, email, fullname, phone, avatar, nav
             navigate("/address")
             window.location.reload();
         } catch (error){
-            toast.error(error.response?.data?.data)
+            toast.error(error.response?.data?.message)
             console.log("REGISTER_API ERROR", error);
         }
         toast.dismiss(toastId);
