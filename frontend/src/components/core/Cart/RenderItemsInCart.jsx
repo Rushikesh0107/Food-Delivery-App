@@ -14,9 +14,26 @@ const RenderItemsInCart = () => {
         cart = JSON.parse(localStorage.getItem('cart'))
     }, [total])
 
+    //console.log(cart?.length);
+
     //console.log(cart[0]);
   return (
-    <div>
+    <>
+    
+    {(cart?.length === 0 || cart?.length == undefined) && (
+    <div
+    className='w-full h-60 flex justify-center items-center md:w-'
+    >
+    <h1
+    className='text-3xl font-semibold text-gray-400 tracking-widest '
+    >
+        Cart is Empty
+        </h1>
+    </div>
+    )}
+    <div
+    className='md:flex-col md:w-1/2 md:mx-auto md:items-center md:justify-center'
+    >
     {cart?.map((item) => {
         return (
             <div 
@@ -74,7 +91,8 @@ const RenderItemsInCart = () => {
             </div>
         );
     })}
-</div>
+    </div>
+    </>
 
   )
 }
