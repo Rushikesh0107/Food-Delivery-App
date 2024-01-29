@@ -7,6 +7,7 @@ import { setUser } from '../../Slices/profileSlice'
 const { 
     ADMIN_LOGIN_API,
     ADD_FOOD_API,
+    ADD_CATEGORY_API,
 } = adminEndpoints;
 
 export const adminLogin = (username, password, navigate) => {
@@ -58,6 +59,35 @@ export const addFood = (title, description, price, category, foodImage ) => {
             }
         } catch(error){
             console.log("ERROR OCCURED AT ADD FOOD API", error);
+            toast.dismiss(toastId);
+            toast.error(error.response.data.data)
+        }
+    }
+}
+
+export const addCategory = (title, categoryImage) => {
+    return async (dispatch) => {
+        const toastId = toast.loading("Adding category...");
+        //console.log(title, categoryImage);
+
+        try{
+            const response = await apiConnector(
+                "POST",
+                ADD_CATEGORY_API,
+                {title, categoryImage},
+                {
+                    "authorization": "Bearer " + localStorage.getItem("accessToken"),
+                    "content-type": "multipart/form-data"
+                }
+            )
+
+            if(response.status === 201){
+                toast.dismiss(toastId);
+                toast.success("Category added successfully");
+            }
+
+        } catch(error){
+            console.log("ERROR OCCURED AT ADD CATEGORY API", error);
             toast.dismiss(toastId);
             toast.error(error.response.data.data)
         }

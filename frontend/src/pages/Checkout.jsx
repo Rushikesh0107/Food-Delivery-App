@@ -1,10 +1,10 @@
 import React from 'react'
-import Receipt from '../components/core/Order/Receipt'
+import OrderSummary from '../components/core/Order/OrderSummary'
 
 const Checkout = () => {
   return (
     <div>
-        <Receipt />
+        <OrderSummary />
     </div>
   )
 }

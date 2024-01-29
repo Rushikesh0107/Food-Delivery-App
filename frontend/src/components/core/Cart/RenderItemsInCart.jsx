@@ -39,7 +39,7 @@ const RenderItemsInCart = () => {
             <div 
             key={item._id} 
             className='bg-white p-4 mt-4 mb-4 rounded-lg shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mx-auto'
-            style={{ width: "95%"}}
+            style={{ width: "95%", height: "fit-content"}}
             >
                 <div className='flex'>
                     <div className='w-1/2'>
@@ -54,7 +54,7 @@ const RenderItemsInCart = () => {
                         </div>
                     </div>
                     <div
-                    className='flex flex-col justify-between items-center w-1/3'
+                    className='flex flex-col justify-between items-center w-1/3 md:justify-evenly'
                     >
                         <h3>
                             Quatntity

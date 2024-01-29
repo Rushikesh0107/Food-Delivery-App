@@ -35,6 +35,10 @@ export const adminEndpoints = {
     //Food Endpoints
     
     ADD_FOOD_API: BASE_URL + '/food/add-food',
+
+    //Category Endpoints
+
+    ADD_CATEGORY_API: BASE_URL + '/category/create-category',
 }
 
 export const userEndpoints = {

@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import { addToCart } from '../../../Slices/cartSlice'
 import { toast } from 'react-hot-toast';
 
-const Items = () => {
+const RenderItemsToRemove = () => {
   const {items} = useSelector((state) => state.item)
   const {categoryId} = useSelector((state) => state.category)
   const dispatch = useDispatch()
@@ -71,41 +71,6 @@ const Items = () => {
     ) : (
       <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {currentItems.map((item) => (
-              <div key={item._id} className="bg-white shadow-md rounded p-4">
-                <div className="flex justify-center">
-                  <img
-                    src={item.foodImage}
-                    alt="food"
-                    className="rounded-md h-40 w-40"
-                  />
-                </div>
-                <div className="mt-2">
-                  <p className="text-lg font-semibold text-center text-gray-700">
-                    {item.title}
-                  </p>
-                  <p className="text-sm font-semibold text-center text-gray-500">
-                    {item.description}
-                  </p>
-                  <div className="flex justify-center mt-2">
-                    <Rating name="read-only" value={item.rating} readOnly />
-                  </div>
-                  <div className="flex justify-center mt-2">
-                    <p className="text-lg font-semibold text-center text-gray-700">
-                      ₹{item.price}
-                    </p>
-                  </div>
-                  <div className="flex justify-center mt-2">
-                    <button
-                      onClick={() => handleClick(item)}
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
 
 
@@ -128,4 +93,4 @@ const Items = () => {
     
   }
 
-export default Items
+export default RenderItemsToRemove

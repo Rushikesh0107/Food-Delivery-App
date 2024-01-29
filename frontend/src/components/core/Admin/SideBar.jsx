@@ -18,9 +18,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import CategoryIcon from '@mui/icons-material/Category';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { logout } from '../../../services/Operations/authAPI';
+import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 import AddFood from './AddFood';
 import AddCategory from './AddCategory';
+import RemoveFood from './RemoveFood';
 
 
 const drawerWidth = 240;
@@ -90,10 +95,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+
+
 export default function SideBar() {
-  const theme = useTheme();
+  const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false);
   const [menuData, setMenuData] = useState("Add Food") 
+  const navigate = useNavigate()
+  
+  const handleLogout = () => {
+    const token = localStorage.getItem('accessToken')
+    dispatch(logout(token, navigate));
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -101,20 +114,32 @@ export default function SideBar() {
       <AppBar 
       position="fixed"
       sx={{}}
-      className='bg-gradient-to-r from-green-600 to-green-800 fonst-semibold'
+      className='bg-gradient-to-r from-gray-100 to-green-800 fonst-semibold'
       >
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="black"
+            sx={{ paddingLeft: "14px"}}
             aria-label="open drawer"
             onClick={() => {setOpen(!open)}}
             edge="start"
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h5" noWrap component="div" color={'black'}>
+            <h1
+            className='font-bold text-2xl pl-5  md:text-3xl'
+            >
             NutrifyMeals
+            </h1>
           </Typography>
+
+          <button
+          onClick={() => handleLogout()}
+          className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-auto'
+          >
+            Logout
+          </button>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -170,12 +195,37 @@ export default function SideBar() {
                 <ListItemText primary="Add Category" sx={{ opacity: open ? 1 : 0 }}/>
               </ListItemButton>
             </ListItem>
+
+            <ListItem 
+            disablePadding sx={{ display: 'block' }}
+            onClick={() => setMenuData("Remove Items")}
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                    <RemoveShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Remove Items" sx={{ opacity: open ? 1 : 0 }}/>
+              </ListItemButton>
+            </ListItem>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {menuData === "Add Food" && <AddFood/>}
         {menuData === "Add Category" && <AddCategory />}
+        {menuData === "Remove Items" && <RemoveFood />}
       </Box>
     </Box>
   );
