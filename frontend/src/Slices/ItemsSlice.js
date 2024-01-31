@@ -14,10 +14,13 @@ const itemSlice = createSlice({
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload;
+        },
+        removeItem: (state, action) => {
+            state.items = state.items.filter(item => item._id !== action.payload)
         }
     }
 });
 
-export const {setItems, setLoading} = itemSlice.actions;
+export const {setItems, removeItem, setLoading} = itemSlice.actions;
 
 export default itemSlice.reducer;

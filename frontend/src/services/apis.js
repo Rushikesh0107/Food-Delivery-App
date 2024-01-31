@@ -35,6 +35,7 @@ export const adminEndpoints = {
     //Food Endpoints
     
     ADD_FOOD_API: BASE_URL + '/food/add-food',
+    DELETE_FOOD_API: BASE_URL + '/food/delete-food',
 
     //Category Endpoints
 

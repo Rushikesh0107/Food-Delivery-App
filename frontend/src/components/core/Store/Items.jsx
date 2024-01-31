@@ -72,24 +72,24 @@ const Items = () => {
       <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {currentItems.map((item) => (
-              <div key={item._id} className="bg-white shadow-md rounded p-4">
+              <div key={item._id} className="bg-white shadow-[inset_-12px_-8px_40px_#46464620] rounded py-4 flex md:flex-col justify-between px-2">
                 <div className="flex justify-center">
                   <img
                     src={item.foodImage}
                     alt="food"
-                    className="rounded-md h-40 w-40"
+                    className="rounded-md h-40 w-40 object-cover" 
                   />
                 </div>
-                <div className="mt-2">
+                <div className="mt-2 w-1/2 md:w-full flex-col gap-4">
                   <p className="text-lg font-semibold text-center text-gray-700">
                     {item.title}
                   </p>
-                  <p className="text-sm font-semibold text-center text-gray-500">
-                    {item.description}
-                  </p>
-                  <div className="flex justify-center mt-2">
+
+                  {/* <div className="flex justify-center mt-2">
                     <Rating name="read-only" value={item.rating} readOnly />
-                  </div>
+                  </div> */}
+
+
                   <div className="flex justify-center mt-2">
                     <p className="text-lg font-semibold text-center text-gray-700">
                       ₹{item.price}
@@ -115,7 +115,7 @@ const Items = () => {
             {Array.from({ length: Math.ceil(items.length / itemsPerPage) }, (_, i) => (
               <button
                 key={i + 1}
-                className={`mx-1 px-3 py-2 bg-gray-300 rounded ${currentPage === i + 1 ? 'bg-gray-500 text-white' : 'text-gray-700'}`}
+                className={`mx-1 px-3 py-2 bg-gray-300 rounded ${currentPage === i + 1 ? 'bg-green-500 text-white' : 'text-green-700'}`}
                 onClick={() => paginate(i + 1)}
               >
                 {i + 1}

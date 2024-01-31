@@ -38,12 +38,12 @@ const RenderItemsInCart = () => {
         return (
             <div 
             key={item._id} 
-            className='bg-white p-4 mt-4 mb-4 rounded-lg shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mx-auto'
-            style={{ width: "95%", height: "fit-content"}}
+            className='bg-white p-4 mt-4 rounded-lg shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mx-auto'
+            style={{ width: "95%",}}
             >
                 <div className='flex'>
-                    <div className='w-1/2'>
-                        <img src={item.foodImage} alt={item.title} className='rounded-lg w-full' />
+                    <div className='w-60 h-32'>
+                        <img src={item.foodImage} alt={item.title} className='rounded-lg w-full h-full object-contain' />
                     </div>
                     <div className='w-2/3 pl-4'>
                         <h1 className='text-xl font-semibold mb-2'>{item.title}</h1>

@@ -3,11 +3,13 @@ import { apiConnector } from '../apiConnector'
 import {setToken} from '../../Slices/authSlice'
 import { adminEndpoints } from '../apis'
 import { setUser } from '../../Slices/profileSlice'
+import { removeItem } from '../../Slices/ItemsSlice'
 
 const { 
     ADMIN_LOGIN_API,
     ADD_FOOD_API,
     ADD_CATEGORY_API,
+    DELETE_FOOD_API,
 } = adminEndpoints;
 
 export const adminLogin = (username, password, navigate) => {
@@ -88,6 +90,38 @@ export const addCategory = (title, categoryImage) => {
 
         } catch(error){
             console.log("ERROR OCCURED AT ADD CATEGORY API", error);
+            toast.dismiss(toastId);
+            toast.error(error.response.data.data)
+        }
+    }
+}
+
+export const deleteFood = (foodId) => {
+    return async (dispatch) => {
+        const toastId = toast.loading("Deleting food...");
+        const token = localStorage.getItem("accessToken");
+        //console.log(token);
+        try{
+            const response = await apiConnector(
+                "DELETE",
+                `${DELETE_FOOD_API}/${foodId}`,
+                null,
+                {
+                    "authorization": "Bearer " + token,
+                }
+            )
+
+            if(response.status === 200){
+                toast.dismiss(toastId);
+                toast.success("Food deleted successfully");
+            }
+            
+            dispatch(removeItem(foodId));
+            
+            toast.dismiss(toastId);
+
+        } catch(error){
+            console.log("ERROR OCCURED AT DELETE FOOD API", error);
             toast.dismiss(toastId);
             toast.error(error.response.data.data)
         }

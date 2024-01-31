@@ -10,8 +10,6 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -25,7 +23,7 @@ import {useNavigate} from 'react-router-dom'
 
 import AddFood from './AddFood';
 import AddCategory from './AddCategory';
-import RemoveFood from './RemoveFood';
+import RenderItemsToRemove from './RemoveFood';
 
 
 const drawerWidth = 240;
@@ -225,7 +223,7 @@ export default function SideBar() {
         <DrawerHeader />
         {menuData === "Add Food" && <AddFood/>}
         {menuData === "Add Category" && <AddCategory />}
-        {menuData === "Remove Items" && <RemoveFood />}
+        {menuData === "Remove Items" && <RenderItemsToRemove />}
       </Box>
     </Box>
   );
