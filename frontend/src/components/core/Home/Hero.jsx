@@ -1,5 +1,6 @@
 import React from 'react'
 import {motion} from 'framer-motion'
+import HeroImage from "../../../assets/Images/Hero.webp"
 
 const Hero = () => {
   return (
@@ -7,8 +8,8 @@ const Hero = () => {
     className='w-full'
     >
         <motion.img 
-        src="https://res.cloudinary.com/ddara3sez/image/upload/v1706347958/epsqxc75egpme6brxjpq.webp" 
-        alt="" 
+        src={HeroImage}
+        alt="hero" 
         className=' mx-auto'
         style={{width: '100%', height: '100%'}}
         whileHover={{ rotate: 20, scale: 1.1 }}

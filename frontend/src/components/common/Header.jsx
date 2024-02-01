@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StyledBadge from '@mui/material/Badge';
 import {useSelector} from 'react-redux';
 import NavBar from './NavBar';
+import Logo from "../../assets/Logo/Logo.png"
 
 const settings = ['Profile', 'Logout'];
 const pages = ['Home', 'Store', 'About', 'Contact'];
@@ -146,7 +147,7 @@ const Header = () => {
       <div>
         <Link to={"/"} className="flex items-center">
                 <img 
-                src="https://res.cloudinary.com/ddara3sez/image/upload/v1706332902/exv4dtqjsbjknadvqywq.png" alt='logo'
+                src={Logo} alt='logo'
                 className='h-28 w-28'
                 />
         </Link>

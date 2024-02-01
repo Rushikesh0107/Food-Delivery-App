@@ -48,3 +48,8 @@ export const userEndpoints = {
     UPDATE_USER_ADDRESS_API: BASE_URL + '/address/update-address',
 }
 
+export const paymentEndpoints = {
+    CHECKOUT_API: BASE_URL + '/payment/checkout',
+    GET_API_KEY: BASE_URL + '/payment/get-key',
+}
+

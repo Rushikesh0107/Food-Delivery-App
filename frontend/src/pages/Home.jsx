@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import HeaderText from '../components/core/Home/HeaderText';
 import Hero from '../components/core/Home/Hero';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import {useNavigate} from 'react-router-dom' 
+import {useNavigate} from 'react-router-dom'
+import Hero2 from "../assets/Images/Hero2.png" 
 
 
 import { motion } from 'framer-motion'
@@ -91,16 +92,16 @@ const Home = () => {
       className=' md:flex-row flex flex-col items-center md:justify-between justify-around w-full h-screen'
       >
         <motion.div
-          className=' md:w-1/2 md:h-full items-center justify-center flex mt-10 md:mt-0'
+         className=' md:w-1/2 md:h-full items-center justify-center flex mt-10 md:mt-0'
           variants={fadeIn('right', 0.2)}
           initial='hidden'
           whileInView={'show'}
           viewport={{ once: false, amount: 0.1 }}
         >
           <img 
-          src="https://res.cloudinary.com/ddara3sez/image/upload/v1706379623/Home/cxpjfofchlajrjwumc5f.png" 
+          src={Hero2} 
           alt="food" 
-          className='md:w-3/4 md:h-3/4'
+          className='w-2/3'
           />
         </motion.div>
 

@@ -1,11 +1,26 @@
 import React from 'react'
 import {motion} from 'framer-motion'
+import {useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import { checkout } from '../../../services/Operations/paymentAPI'
 
 const PlaceOrder = () => {
 
     const total = localStorage.getItem('total') ? JSON.parse(localStorage.getItem('total')) : []
 
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
+
+    const {cart} = useSelector(state => state.cart)
+
+    const dispatch = useDispatch()
+
+
     const address = localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : ""
+
+    const handlePlaceOrder = (total) => {
+        checkout(total, dispatch, user)
+    }
+
   return (
 
     <div
@@ -39,7 +54,7 @@ const PlaceOrder = () => {
                     <h1
                     className='text-3xl font-bold text-gray-800 '
                     >
-                        Total: {total}
+                        Total: ₹ {total} 
                     </h1>
                 </div>
             </div>
@@ -48,6 +63,7 @@ const PlaceOrder = () => {
             <div>
                 <button
                 className='bg-green-500 text-white px-5 py-2 rounded-xl font-semibold text-xl mt-7'
+                onClick={() => handlePlaceOrder(total)}
                 >
                     Place Order
                 </button>

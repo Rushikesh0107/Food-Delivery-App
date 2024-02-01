@@ -40,7 +40,7 @@ const OrderSummary = () => {
                     >
                       <img
                       src={item.foodImage}
-                      alt={item.name}
+                      alt={item.title}
                       className='w-20 h-20 object-contain'
                       />
                     </div>
@@ -55,7 +55,7 @@ const OrderSummary = () => {
                       <p
                       className='text-gray-800'
                       >
-                        {item.price}
+                        ₹ {item.price}
                       </p>
                     </div>
                     <div

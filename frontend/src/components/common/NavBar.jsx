@@ -5,6 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StyledBadge from '@mui/material/Badge';
 import {useSelector} from 'react-redux';
 import Avatar from '@mui/material/Avatar';
+import Logo from "../../assets/Logo/Logo.png"
 
 const NavBar = () => {
 
@@ -55,7 +56,7 @@ const NavBar = () => {
                 className='flex items-center justify-center'
                 >
                     <img 
-                    src="https://res.cloudinary.com/ddara3sez/image/upload/v1706332902/exv4dtqjsbjknadvqywq.png" alt='logo'
+                    src={Logo} alt='logo'
                     className='h-32 w-32'
                     />
                 </Link>
