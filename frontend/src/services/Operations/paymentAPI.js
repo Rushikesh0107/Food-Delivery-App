@@ -61,14 +61,14 @@ export const checkout = async (amount, dispatch, user) => {
         }
 
 
-        var options = {
-            key: RAZORPAY_API_KEY, // Enter the Key ID generated from the Dashboard
+        let options = {
+            key: RAZORPAY_API_KEY.data.data, 
             amount: amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             currency: "INR",
             name: "NutrifyMeals",
             description: "Thank you for purchasing us.",
             image: Logo,
-            order_id: "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            order_id: orderResponse.data.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             callback_url: "http://localhost:8000/api/v1/payment/verify-payment",
             prefill: {
                 name: user.fullname,
@@ -82,7 +82,6 @@ export const checkout = async (amount, dispatch, user) => {
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
-        
         
     } catch(error) {
         toast.error(error.message)
