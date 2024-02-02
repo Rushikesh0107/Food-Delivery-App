@@ -28,15 +28,7 @@ const checkout = asyncHandler(async (req, res) => {
 const paymentVerification = asyncHandler(async (req, res) => {
     console.log(req.body);
 
-    return res
-    .status(200)
-    .json(
-        new ApiResponse(
-            200,
-            {success: true},
-            "Payment verified successfully"
-        )
-    )
+    
 })
 
 

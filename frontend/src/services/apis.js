@@ -51,5 +51,6 @@ export const userEndpoints = {
 export const paymentEndpoints = {
     CHECKOUT_API: BASE_URL + '/payment/checkout',
     GET_API_KEY: BASE_URL + '/payment/get-key',
+    PAYMNET_VERIFICATION_API: BASE_URL + '/payment/verify-payment',
 }
 

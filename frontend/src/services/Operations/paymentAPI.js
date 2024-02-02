@@ -2,41 +2,20 @@ import {toast} from 'react-hot-toast'
 import {apiConnector} from '../apiConnector'
 import { paymentEndpoints } from '../apis'
 import Logo from "../../assets/Logo/Logo.png"
+import { resetCart } from '../../Slices/cartSlice'
 
 const {
     CHECKOUT_API,
-    GET_API_KEY
+    GET_API_KEY,
+    PAYMNET_VERIFICATION_API
 } = paymentEndpoints
 
-function loadScrip(src) {
-    return new Promise((resolve) => {
-        const script = document.createElement("script");
-        script.src = src;
-
-        script.onload = () => {
-            resolve(true);
-        }
-
-        script.onerror = () => {
-            resolve(false)
-        }
-
-        document.body.appendChild(script);
-    })
-}
 
 
-export const checkout = async (amount, dispatch, user) => {
+export const checkout = async (amount, dispatch, user, navigate) => {
     const toastId = toast.loading("Loading...")
 
     try{
-        const res = await loadScrip("https://checkout.razorpay.com/v1/checkout.js")
-
-        if(!res) {
-            toast.error("Razorpay SDK failed to load. Are you online?")
-            return;
-        }
-
         const orderResponse = await apiConnector(
             "POST",
             CHECKOUT_API,
@@ -63,13 +42,12 @@ export const checkout = async (amount, dispatch, user) => {
 
         let options = {
             key: RAZORPAY_API_KEY.data.data, 
-            amount: amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            amount: amount, 
+            order_id: orderResponse.data.data.id,
             currency: "INR",
             name: "NutrifyMeals",
             description: "Thank you for purchasing us.",
-            image: Logo,
-            order_id: orderResponse.data.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            callback_url: "http://localhost:8000/api/v1/payment/verify-payment",
+            image: "https://res.cloudinary.com/ddara3sez/image/upload/v1706332902/exv4dtqjsbjknadvqywq.png",
             prefill: {
                 name: user.fullname,
                 email: user.email,
@@ -77,11 +55,19 @@ export const checkout = async (amount, dispatch, user) => {
             },
             theme: {
                 "color": "#121212"
+            },
+            handler: function (response) {
+
+                verifyPayment ({...response, amount: amount}, navigate, dispatch)
             }
         };
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
+        paymentObject.on("payment.failed", function (response) {
+            toast.error("oops, payment failed");
+            console.log("payment failed.... ", response.error);
+        })
         
     } catch(error) {
         toast.error(error.message)
@@ -90,3 +76,35 @@ export const checkout = async (amount, dispatch, user) => {
     }
     toast.dismiss(toastId)
 }
+
+
+
+
+//=======================verify payment=======================
+
+async function verifyPayment(response, navigate, dispatch) {
+    const toastId = toast.loading("Verifying payment...")
+    
+    try {
+        const response =  await apiConnector(
+            "POST",
+            PAYMNET_VERIFICATION_API,
+            {response},
+        )
+
+        if(!response.data.success) {
+            throw new Error(response?.data?.message)
+        }
+
+        toast.dismiss(toastId)
+
+        toast.success("Payment successful")
+        navigate("/orders")
+        dispatch(resetCart());
+    } catch (error){
+        toast.dismiss(toastId)
+        toast.error(error.message)
+        console.log(error);
+    }
+}
+

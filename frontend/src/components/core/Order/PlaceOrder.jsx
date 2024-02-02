@@ -3,10 +3,12 @@ import {motion} from 'framer-motion'
 import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
 import { checkout } from '../../../services/Operations/paymentAPI'
+import {useNavigate} from 'react-router-dom'
 
 const PlaceOrder = () => {
 
     const total = localStorage.getItem('total') ? JSON.parse(localStorage.getItem('total')) : []
+    const navigate = useNavigate();
 
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
 
@@ -18,7 +20,7 @@ const PlaceOrder = () => {
     const address = localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : ""
 
     const handlePlaceOrder = (total) => {
-        checkout(total, dispatch, user)
+        checkout(total, dispatch, user, navigate)
     }
 
   return (

@@ -16,6 +16,7 @@ import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import Cart from './pages/Cart.jsx'
 import AdminLogin from './pages/AdminLogin.jsx'
+import Order from './pages/Order.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import ProfileEdit from './pages/ProfileEdit.jsx'
@@ -92,6 +93,12 @@ function App() {
         <Route path='/logout' element={
           <ProtectedRoutes>
             <Logout />
+          </ProtectedRoutes>
+        }/>
+
+        <Route path='/order' element={
+          <ProtectedRoutes>
+            <Order />
           </ProtectedRoutes>
         }/>
 
