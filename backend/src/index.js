@@ -8,10 +8,6 @@ dotenv.config({
     path: './.env'
 });
 
-export const instance = new Razorpay({
-    key_id: process.env.RAZORPAY_API_KEY,
-    key_secret: process.env.RAZORPAY_API_SECRET,
-  });
 
 connectDB()
 .then(() => {
@@ -22,3 +18,8 @@ connectDB()
 .catch ((error) => {
     console.log("mongoDB connection failed !!!", error);
 })
+
+export const instance = new Razorpay({
+    key_id: process.env.RAZORPAY_API_KEY,
+    key_secret: process.env.RAZORPAY_API_SECRET,
+  });

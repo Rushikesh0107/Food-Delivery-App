@@ -8,10 +8,10 @@ const HeaderText = () => {
         className='font-bold text-5xl md:tracking-widest md:text-6xl'
         >
             <p>
-                Healthy Eating
+                Healthy Indside
             </p>
             <p>
-                Reinvented
+                Freshness outside
             </p>
             <div>
             <motion.button type="button" 
