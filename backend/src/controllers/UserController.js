@@ -98,15 +98,20 @@ const registerUser = asyncHandler(async (req, res) => {
             });
         }
 
-        return res
-        .status(error.statusCode)
-        .json(
-            new ApiResponse(
-                error.statusCode,
-                error.message,
-                "Something went wrong while creating user"
+        if(error.keyPattern?.phone === 1){
+            return res
+            .status(400)
+            .json(
+                new ApiResponse(
+                    400,
+                    {},
+                    "Phone number already exists"
+                )   
             )
-        )
+        }
+
+
+        throw new ApiErrors(400, error || "Something went wrong while creating user")
     }
 })
 
