@@ -88,7 +88,16 @@ const registerUser = asyncHandler(async (req, res) => {
         )
     } catch (error) {
         console.log("ERROR OCCURED AT REGISTER USER API", error);
-        fs.unlinkSync(`${req.files?.avatar[0]?.path}`)
+        const avatarPath = req.files?.avatar[0]?.path;
+
+        if (fs.existsSync(avatarPath)) {
+            fs.unlink(avatarPath, (err) => {
+                if (err) {
+                    console.error('Error deleting file:', err);
+                }
+            });
+        }
+
         return res
         .status(error.statusCode)
         .json(
