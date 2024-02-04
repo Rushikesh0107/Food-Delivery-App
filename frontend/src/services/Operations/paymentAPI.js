@@ -61,10 +61,6 @@ export const checkout = async (amount, dispatch, user, navigate) => {
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
-        paymentObject.on("payment.failed", function (response) {
-            toast.error("oops, payment failed");
-            console.log("payment failed.... ", response.error);
-        })
         
     } catch(error) {
         toast.error(error.message)
