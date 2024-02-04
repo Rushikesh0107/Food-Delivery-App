@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from "../assets/Logo/Logo.png"
 import {motion} from 'framer-motion'
 import { fadeIn } from '../components/common/motionFrameVariants';
-import Anuj from "../assets/Images/Anuj.jpeg"
+import Anuj from "../assets/Images/anuj.jpeg"
 
 const About = () => {
   return (
