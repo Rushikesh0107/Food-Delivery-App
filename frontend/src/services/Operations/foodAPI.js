@@ -35,7 +35,7 @@ export const getAllFoods = () => {
             //toast.dismiss(toastId);
         } catch (error) {
             console.log("GET_ALL_FOODS_API ERROR", error);
-            toast.dismiss(toastId);
+            //toast.dismiss(toastId);
             dispatch(setLoading(false));
         }
         dispatch(setLoading(false));
@@ -62,10 +62,10 @@ export const getFoodByCategory = (id) => {
             const foods = response.data.data;
 
             dispatch(setItems(foods))
-            toast.dismiss(toastId);
+            //toast.dismiss(toastId);
         } catch (error) {
             console.log("GET_FOOD_BY_CATEGORY_API ERROR", error);
-            toast.dismiss(toastId);
+            //toast.dismiss(toastId);
             dispatch(setLoading(false));
         }
         //dispatch(setLoading(false));

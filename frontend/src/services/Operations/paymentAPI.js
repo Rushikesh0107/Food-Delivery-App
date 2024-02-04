@@ -48,6 +48,7 @@ export const checkout = async (amount, dispatch, user, navigate) => {
             name: "NutrifyMeals",
             description: "Thank you for purchasing us.",
             image: "https://res.cloudinary.com/ddara3sez/image/upload/v1706332902/exv4dtqjsbjknadvqywq.png",
+            callback_url: "http://localhost:8000/api/v1/payment/verify-payment",
             prefill: {
                 name: user.fullname,
                 email: user.email,
@@ -56,10 +57,6 @@ export const checkout = async (amount, dispatch, user, navigate) => {
             theme: {
                 "color": "#121212"
             },
-            handler: function (response) {
-
-                verifyPayment ({...response, amount: amount}, navigate, dispatch)
-            }
         };
 
         const paymentObject = new window.Razorpay(options);
@@ -77,34 +74,4 @@ export const checkout = async (amount, dispatch, user, navigate) => {
     toast.dismiss(toastId)
 }
 
-
-
-
-//=======================verify payment=======================
-
-async function verifyPayment(response, navigate, dispatch) {
-    const toastId = toast.loading("Verifying payment...")
-    
-    try {
-        const response =  await apiConnector(
-            "POST",
-            PAYMNET_VERIFICATION_API,
-            {response},
-        )
-
-        if(!response.data.success) {
-            throw new Error(response?.data?.message)
-        }
-
-        toast.dismiss(toastId)
-
-        toast.success("Payment successful")
-        navigate("/orders")
-        dispatch(resetCart());
-    } catch (error){
-        toast.dismiss(toastId)
-        toast.error(error.message)
-        console.log(error);
-    }
-}
 

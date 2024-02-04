@@ -1,10 +1,11 @@
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { instance } from "../index.js"
 import { ApiResponse } from "../utils/ApiResponseHandler.js";
+import crypto from "crypto";
 
 const checkout = asyncHandler(async (req, res) => {
 
-    console.log(req.body);
+    //console.log(req.body);
 
     const options = {
         amount: Number(req.body.amount) * 100, 
@@ -26,9 +27,24 @@ const checkout = asyncHandler(async (req, res) => {
 
 
 const paymentVerification = asyncHandler(async (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
 
-    
+    const {razorpay_payment_id, razorpay_order_id, razorpay_signature, amount} = req.body;
+
+   const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+    const expectedSignature = crypto.createHmac('sha256', process.env.RAZORPAY_API_SECRET)
+    .update(body.toString())
+    .digest('hex');
+
+
+    const isAuthentic = expectedSignature === razorpay_signature;
+
+    if(isAuthentic) {
+        console.log("Payment verified");
+        res.redirect("http://localhost:5173/order")
+    }
+
 })
 
 
