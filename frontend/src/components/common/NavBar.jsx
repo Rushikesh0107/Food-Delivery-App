@@ -13,7 +13,7 @@ const NavBar = () => {
     const {user} = useSelector(state => state.profile)
     const {totalItems} = useSelector(state => state.cart)
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const settings = ['Profile', 'Logout'];
+    const settings = ['Profile', 'Logout', 'Order'];
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');

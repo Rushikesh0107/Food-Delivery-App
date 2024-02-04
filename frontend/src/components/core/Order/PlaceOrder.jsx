@@ -20,7 +20,7 @@ const PlaceOrder = () => {
     const address = localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : ""
 
     const handlePlaceOrder = (total) => {
-        checkout(total, dispatch, user, navigate)
+        checkout(total, dispatch, user, navigate, address, cart)
     }
 
   return (
@@ -66,6 +66,7 @@ const PlaceOrder = () => {
                 <button
                 className='bg-green-500 text-white px-5 py-2 rounded-xl font-semibold text-xl mt-7'
                 onClick={() => handlePlaceOrder(total)}
+                disabled={total.length === 0 ? true : false}
                 >
                     Place Order
                 </button>

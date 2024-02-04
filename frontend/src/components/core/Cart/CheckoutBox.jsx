@@ -41,6 +41,7 @@ const CheckoutBox = () => {
                         <button
                         className='bg-green-500 text-white px-2 py-2 rounded-lg md:w-1/3 font-semibold'
                         onClick={handleCheckout}
+                        disabled={total === 0}
                         >
                             Checkout
                         </button>

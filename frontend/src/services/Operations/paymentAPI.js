@@ -12,8 +12,10 @@ const {
 
 
 
-export const checkout = async (amount, dispatch, user, navigate) => {
+export const checkout = async (amount,dispatch, user, navigate, address, cart) => {
     const toastId = toast.loading("Loading...")
+
+    const token = localStorage.getItem("accessToken")
 
     try{
         const orderResponse = await apiConnector(
@@ -21,7 +23,12 @@ export const checkout = async (amount, dispatch, user, navigate) => {
             CHECKOUT_API,
             {
                 amount: amount,
-            }   
+                address: address,
+                cart: cart
+            },   
+            {
+                "authorization": `Bearer ${token}`
+            }
 
         )
 
@@ -54,6 +61,9 @@ export const checkout = async (amount, dispatch, user, navigate) => {
                 email: user.email,
                 contact: user.phone
             },
+            notes: {
+                address: address
+            },
             theme: {
                 "color": "#121212"
             },
@@ -68,6 +78,7 @@ export const checkout = async (amount, dispatch, user, navigate) => {
         toast.dismiss(toastId)
     }
     toast.dismiss(toastId)
+    dispatch(resetCart());  
 }
 
 

@@ -9,7 +9,7 @@ import {useSelector} from 'react-redux';
 import NavBar from './NavBar';
 import Logo from "../../assets/Logo/Logo.png"
 
-const settings = ['Profile', 'Logout'];
+const settings = ['Profile', 'Logout', 'Order'];
 const pages = ['Home', 'Store', 'About', 'Contact'];
 
 const Header = () => {

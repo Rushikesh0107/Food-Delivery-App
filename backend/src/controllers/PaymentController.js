@@ -5,8 +5,6 @@ import crypto from "crypto";
 
 const checkout = asyncHandler(async (req, res) => {
 
-    //console.log(req.body);
-
     const options = {
         amount: Number(req.body.amount) * 100, 
     }
@@ -27,7 +25,6 @@ const checkout = asyncHandler(async (req, res) => {
 
 
 const paymentVerification = asyncHandler(async (req, res) => {
-    //console.log(req.body);
 
     const {razorpay_payment_id, razorpay_order_id, razorpay_signature, amount} = req.body;
 
@@ -41,7 +38,7 @@ const paymentVerification = asyncHandler(async (req, res) => {
     const isAuthentic = expectedSignature === razorpay_signature;
 
     if(isAuthentic) {
-        console.log("Payment verified");
+        console.log(req.body);
         res.redirect("http://localhost:5173/order")
     }
 

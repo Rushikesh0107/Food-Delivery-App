@@ -1,33 +1,12 @@
 import mongoose, { Schema } from "mongoose" 
 
-const orderItmeSchema = new Schema({
-    foodId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Food',
-        required: true
-    },
-    quantity: {
-        type: Number,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true,
-        default: 1,
-    },
-    instruction: {
-        type: String,
-        default: ""
-    }
-})
-
 const orderSchema  = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    orderItems: [orderItmeSchema],
+    orderItems: [],
     orderTotal: {
         type: Number,
         required: true,
