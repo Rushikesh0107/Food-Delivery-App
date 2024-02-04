@@ -32,7 +32,7 @@ const Contact = () => {
 
   return (
     <div
-    className='bg-gradient-to-r from-gray-100 to-green-900'
+    className='bg-gradient-to-r from-gray-100 to-green-900 overflow-x-hidden'
     style={{height: 'calc(100vh - 64px)'}}
     >
         <div>

@@ -16,9 +16,9 @@ const {
 
 export const getAllFoods = () => {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading Foods...");
+        //const toastId = toast.loading("Loading Foods...");
         dispatch(setLoading(true));
-        //console.log("all wali req ho rahi hai");
+
 
         try {
             const response = await apiConnector(
@@ -32,7 +32,7 @@ export const getAllFoods = () => {
             const foods = response.data.data;
             //console.log(foods);
             dispatch(setItems(foods))
-            toast.dismiss(toastId);
+            //toast.dismiss(toastId);
         } catch (error) {
             console.log("GET_ALL_FOODS_API ERROR", error);
             toast.dismiss(toastId);
@@ -46,8 +46,8 @@ export const getAllFoods = () => {
 
 export const getFoodByCategory = (id) => {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading Foods...");
-        dispatch(setLoading(true));
+        //const toastId = toast.loading("Loading Foods...");
+        //dispatch(setLoading(true));
         //console.log(id);
 
         try {
@@ -68,7 +68,7 @@ export const getFoodByCategory = (id) => {
             toast.dismiss(toastId);
             dispatch(setLoading(false));
         }
-        dispatch(setLoading(false));
+        //dispatch(setLoading(false));
     }
 }
 

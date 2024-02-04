@@ -7,7 +7,7 @@ import Anuj from "../assets/Images/anuj.jpeg"
 const About = () => {
   return (
     <div
-    className='bg-gradient-to-r from-gray-100 to-green-900 w-full'
+    className='bg-gradient-to-r from-gray-100 to-green-900 w-full overflow-x-hidden'
     >
         <motion.div
         className='flex flex-col items-center' 
