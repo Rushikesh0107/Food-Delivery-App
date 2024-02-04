@@ -46,7 +46,7 @@ const Home = () => {
           initial={{ x: -400, opacity: 0 }} // Initial position outside the viewport on the left
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
-          className='flex items-center w-full justify-center h-60 md:h-full md:w-1/2'
+          className='flex items-center p-5 w-full justify-center h-60 md:h-full md:w-1/2'
           
         >
           <HeaderText />
@@ -68,15 +68,15 @@ const Home = () => {
         {isMobile && (
         <>
           <motion.div
-          className=' w-full h-16 flex items-center justify-center text-white font-bold flex-col'
-          style={{position: 'relative', bottom: -180}}
+          className=' w-full h-16 flex items-center justify-center text-white font-bold flex-col hover:cursor-pointer'
+          style={{position: 'relative', bottom: -100}}
           >
-            <span 
+            <button 
             className='tracking-widest cursor-pointer text-3xl'
             onClick={() => window.scrollTo({top: window.innerHeight, behavior: 'smooth', opacity: 0})}
             >
               Explore 
-            </span>
+            </button>
             <KeyboardArrowDownIcon 
             className='' 
             sx={{ fontSize: 50 }}

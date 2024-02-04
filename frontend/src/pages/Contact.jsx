@@ -112,7 +112,7 @@ const Contact = () => {
 
           <div
           className='bg-white p-3 rounded-full cursor-pointer hover:bg-gray-100 transition-all'
-          onClick={() => window.open("https://wa.me/8097018816")}
+          onClick={() => window.open("https://wa.me/+918097018816")}
           >
             <WhatsAppIcon />
             </div>
