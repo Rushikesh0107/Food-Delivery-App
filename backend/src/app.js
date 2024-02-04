@@ -17,8 +17,7 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 app.use(cors({
-    origin: 'https://food-delivery-app-pi-pied.vercel.app',
-    origin: 'http://localhost:5173',
+    origin: ['https://food-delivery-app-pi-pied.vercel.app', 'http://localhost:5173'],
     credentials: true,
 }))
 
