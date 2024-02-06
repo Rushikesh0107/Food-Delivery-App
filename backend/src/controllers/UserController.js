@@ -376,6 +376,27 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
     )
 })
 
+const getUserById = asyncHandler(async(req, res) => {
+    const id = req.params._id;
+
+    if (!id) {
+        throw new ApiErrors(400, "Id is required")
+    }
+
+    const user = await User.findById(id).select("-password -refreshToken")
+
+    if (!user) {
+        throw new ApiErrors(404, "User not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, user, "User fetched successfully")
+    )
+})
+
+
 
 export {
     registerUser,
@@ -386,5 +407,6 @@ export {
     getCurrentUser,
     updateAccountDetails,
     updateUserAvatar,
-    generateAccessAndRefreshToken
+    generateAccessAndRefreshToken,
+    getUserById
 }

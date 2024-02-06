@@ -10,6 +10,7 @@ const {
     ADD_FOOD_API,
     ADD_CATEGORY_API,
     DELETE_FOOD_API,
+    DELETE_DELIVERED_ORDERS_API
 } = adminEndpoints;
 
 export const adminLogin = (username, password, navigate) => {
@@ -124,6 +125,40 @@ export const deleteFood = (foodId) => {
             console.log("ERROR OCCURED AT DELETE FOOD API", error);
             toast.dismiss(toastId);
             toast.error(error.response.data.data)
+        }
+    }
+}
+
+//=======================delete-delivered-orders=======================
+
+export const deleteDeliveredOrder = (id) => {
+    return async (dispatch) => {
+        const toastId = toast.loading("Deleting order")
+        //console.log(DELETE_DELIVERED_ORDERS_API);
+        try{
+            const response = await apiConnector(
+                "DELETE",
+                `${DELETE_DELIVERED_ORDERS_API}/${id}`,
+                null,
+                {
+                    "authorization": `Bearer ${localStorage.getItem("accessToken")}`
+                }
+            )
+
+            if(response.data.status === 404){
+                return toast.error("No order found")
+            } 
+
+            if(response.data.status > 400){
+                return toast.error("Something went wrong while deleting order")
+            }
+
+            toast.dismiss(toastId)
+            toast.success("Order deleted successfully")
+        } catch (error){
+            console.log("ERROR WHILE DELETING ORDER",error)
+            toast.dismiss(toastId)
+            toast.error("Something went wrong while deleting order")
         }
     }
 }

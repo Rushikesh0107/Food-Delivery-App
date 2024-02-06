@@ -40,6 +40,10 @@ export const adminEndpoints = {
     //Category Endpoints
 
     ADD_CATEGORY_API: BASE_URL + '/category/create-category',
+
+    //orders Endpoints
+
+    DELETE_DELIVERED_ORDERS_API: BASE_URL + '/orders/delete-delivered-orders',
 }
 
 export const userEndpoints = {
@@ -56,5 +60,6 @@ export const paymentEndpoints = {
 
 export const orderEndpoints = {
     FETCH_ORDER_API: BASE_URL + '/orders/fetch-order',
+    FETCH_ALL_ORDERS_API: BASE_URL + '/orders/fetch-all-orders',
 }
 

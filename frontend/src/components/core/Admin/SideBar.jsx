@@ -16,7 +16,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import CategoryIcon from '@mui/icons-material/Category';
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import PaidIcon from '@mui/icons-material/Paid';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import { logout } from '../../../services/Operations/authAPI';
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
@@ -24,6 +25,8 @@ import {useNavigate} from 'react-router-dom'
 import AddFood from './AddFood';
 import AddCategory from './AddCategory';
 import RenderItemsToRemove from './RemoveFood';
+import OrdersForAdmin from './OrdersForAdmin';
+import Order from '../../../pages/Order';
 
 
 const drawerWidth = 240;
@@ -212,11 +215,36 @@ export default function SideBar() {
                     justifyContent: 'center',
                   }}
                 >
-                    <RemoveShoppingCartIcon />
+                    <InventoryIcon />
                 </ListItemIcon>
                 <ListItemText primary="Remove Items" sx={{ opacity: open ? 1 : 0 }}/>
               </ListItemButton>
             </ListItem>
+
+            <ListItem 
+            disablePadding sx={{ display: 'block' }}
+            onClick={() => setMenuData("Orders")}
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                    <PaidIcon />
+                </ListItemIcon>
+                <ListItemText primary="Orders" sx={{ opacity: open ? 1 : 0 }}/>
+              </ListItemButton>
+            </ListItem>
+
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -224,6 +252,7 @@ export default function SideBar() {
         {menuData === "Add Food" && <AddFood/>}
         {menuData === "Add Category" && <AddCategory />}
         {menuData === "Remove Items" && <RenderItemsToRemove />}
+        {menuData === "Orders" && <OrdersForAdmin />}
       </Box>
     </Box>
   );
