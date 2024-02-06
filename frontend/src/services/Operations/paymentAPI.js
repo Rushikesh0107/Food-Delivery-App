@@ -12,7 +12,7 @@ const {
 
 
 
-export const checkout = async (amount,dispatch, user, navigate, address, cart) => {
+export const checkout = async (amount, dispatch, user, navigate, address, cart) => {
     const toastId = toast.loading("Loading...")
 
     const token = localStorage.getItem("accessToken")
@@ -23,8 +23,6 @@ export const checkout = async (amount,dispatch, user, navigate, address, cart) =
             CHECKOUT_API,
             {
                 amount: amount,
-                address: address,
-                cart: cart
             },   
             {
                 "authorization": `Bearer ${token}`
@@ -55,7 +53,6 @@ export const checkout = async (amount,dispatch, user, navigate, address, cart) =
             name: "NutrifyMeals",
             description: "Thank you for purchasing us.",
             image: "https://res.cloudinary.com/ddara3sez/image/upload/v1706332902/exv4dtqjsbjknadvqywq.png",
-            callback_url: "http://localhost:8000/api/v1/payment/verify-payment",
             prefill: {
                 name: user.fullname,
                 email: user.email,
@@ -63,6 +60,9 @@ export const checkout = async (amount,dispatch, user, navigate, address, cart) =
             },
             notes: {
                 address: address
+            },
+            handler: function (response) {
+                verifyPayment({...response, amount, user, address, cart}, navigate, dispatch)
             },
             theme: {
                 "color": "#121212"
@@ -77,8 +77,36 @@ export const checkout = async (amount,dispatch, user, navigate, address, cart) =
         console.log(error);
         toast.dismiss(toastId)
     }
+    toast.dismiss(toastId)  
+}
+
+async function verifyPayment (bodyData, navigate, dispatch){
+    
+    const toastId = toast.loading("Loading...")
+    //console.log(bodyData);
+
+    try{
+        const response = await apiConnector(
+            "POST",
+            PAYMNET_VERIFICATION_API,
+            {bodyData},
+            {
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        )
+
+        if(!response.data.success) {
+            throw new Error(response?.data?.message)
+        }
+
+        toast.success("Payment Successful")
+        navigate("/order")
+        dispatch(resetCart())
+    } catch(error) {
+        console.log("PAYMENT VERIFICATION ERROR", error);
+        toast.error("PAYMENT VERIFICATION FAILED")
+    }
     toast.dismiss(toastId)
-    dispatch(resetCart());  
 }
 
 

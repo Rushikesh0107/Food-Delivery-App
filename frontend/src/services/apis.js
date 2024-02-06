@@ -54,3 +54,7 @@ export const paymentEndpoints = {
     PAYMNET_VERIFICATION_API: BASE_URL + '/payment/verify-payment',
 }
 
+export const orderEndpoints = {
+    FETCH_ORDER_API: BASE_URL + '/orders/fetch-order',
+}
+

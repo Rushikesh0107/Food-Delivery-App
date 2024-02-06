@@ -13,11 +13,10 @@ const orderSchema  = new Schema({
     },
     deliveryFee: {
         type: Number,
-        required: true,
     },
     deliveryAddress: {
-        type: Schema.Types.ObjectId,
-        ref: 'Address',
+        type: String,
+        required: true,
     },
     grandTotal: {
         type: Number,

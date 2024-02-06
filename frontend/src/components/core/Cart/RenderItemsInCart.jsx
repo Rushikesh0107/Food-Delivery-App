@@ -49,7 +49,7 @@ const RenderItemsInCart = () => {
                         <h1 className='text-xl font-semibold mb-2'>{item.title}</h1>
                         <p className='text-gray-600'>{item.description}</p>
                         <div className='mt-2 flex items-center'>
-                            <span className='text-green-500 font-semibold mr-2'>${item.price}</span>
+                            <span className='text-green-500 font-semibold mr-2'>₹{item.price}</span>
                             {/* Add quantity or any other information here */}
                         </div>
                     </div>

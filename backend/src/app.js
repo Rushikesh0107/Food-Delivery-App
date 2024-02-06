@@ -8,6 +8,7 @@ import foodRouter from "./routes/Food.route.js"
 import cartRouter from "./routes/Cart.route.js"
 import addressRouter from "./routes/Address.route.js"
 import paymentRouter from "./routes/Payment.route.js"
+import orderRouter from "./routes/Order.route.js"
 
 const app = express();
 
@@ -34,5 +35,7 @@ app.use("/api/v1/cart", cartRouter)
 app.use("/api/v1/address", addressRouter)
 
 app.use("/api/v1/payment", paymentRouter)
+
+app.use("/api/v1/orders", orderRouter)
 
 export { app };
