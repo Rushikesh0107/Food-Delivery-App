@@ -46,7 +46,7 @@ const AdminLogin = () => {
             onSubmit={handleOnSubmit}
             >
             <input 
-            type="username" 
+            type="password" 
             required
             value={username}
             name='username'
@@ -56,7 +56,7 @@ const AdminLogin = () => {
             />
 
             <input 
-            type="text" 
+            type="password" 
             required
             value={password}
             name='password'
