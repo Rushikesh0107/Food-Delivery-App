@@ -1,8 +1,3 @@
-Sure! Here's the complete **`README.md`** file content for your **Food Delivery Application built with the MERN stack**:
-
----
-
-````markdown
 # 🍔 Food Delivery Application
 
 A full-featured food delivery web application built using the **MERN stack**. It allows users to browse restaurants, view menus, place orders, and track deliveries. Admins can manage restaurants, menu items, and monitor order statuses.
